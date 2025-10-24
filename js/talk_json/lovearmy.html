@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Proxy Pattern - 恋爱代理系统</title>
+</head>
+
+<body>
+  <script>
+    // 👨‍💼 角色A：害羞的帅哥（真实发送者）
+    let A = {
+      name: '帅哥',
+      sendFlower: function (target) {
+        // 把花交给“代理” —— 军师C
+        target.receiveFlower(A);
+      }
+    };
+
+    // 👩‍🦰 角色B：美女（真实接收者）
+    let B = {
+      name: '美女',
+      receiveFlower: function (sender) {
+        console.log('美女收到了' + sender.name + '的花 💐');
+      }
+    };
+
+    // 🧙‍♂️ 角色C：军师（代理对象）
+    let C = {
+      name: "军师",
+      receiveFlower: function (sender) {
+        // 代理的职责：转发请求到真实对象
+        console.log(`军师C收到花，正在转交给美女...`);
+        B.receiveFlower(sender);
+      }
+    };
+
+    // 🚀 执行：帅哥A把花交给军师C（而不是直接给美女B）
+    A.sendFlower(C);
+  </script>
+</body>
+
+</html>

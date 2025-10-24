@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Proxy Pattern</title>
+</head>
+<body>
+<script>
+  let A={
+    name:'帅哥',
+    sendFlower:function(target){
+      target.receiveFlower(A);
+    }
+  }
+  let B={
+    name:'美女',
+    receiveFlower:function(sender){
+      console.log('美女'+'收到了'+sender.name+'的花');
+    }
+  }
+  let C={
+    name:"军师",
+    receiveFlower:function(sender){
+      B.receiveFlower(sender);
+    }
+  }
+</script>  
+</body>
+</html>

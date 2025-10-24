@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // 面向对象思想
+    // 表现力的JSON 对象字面量
+    //let 变量 关键字
+    //key:value,
+    //typeof   object 
+    let wby = {
+      name: '王博扬',//字符串 String
+      hometown: '永丰',
+      age: 18,//number 不适合计算  数值类型
+      sex: '男',//String
+      hobbies: ['学习', '打羽毛球', '唱歌'],//object 
+      isSinger: false,
+      XiaoMiSu7:null, 
+      sendFlower:function(target){
+        target.receiveFlower(wby);
+      }
+    }
+    let a;
+    let dgx={
+      moodIndex:30,
+      name:'乡乡',
+      hometown:'抚州',
+      receiveFlower:function(sender){
+        console.log('美女乡乡收到了'+sender.name+'的花');
+        if(this.moodIndex <80){
+          console.log('不约，我们不约');
+        }else{
+          console.log('硕果走起哟');
+        }
+      }
+    }
+    
+    let xh={
+      name:'小红',
+      hometown:'永丰',
+       receiveFlower: function (sender) {
+        setTimeout(function(){
+          dgx.moodIndex =90;
+          dgx.receiveFlower(sender);
+        },3000)
+        // console.log('小红收到了' + sender.name + '的花');
+        //xh.receiveFlower(sender);
+        //作用？
+        // if(sender.name==='王博扬'){
+        //   console.log('让我们在一起吧')
+        // }
+      }
+    }
+  </script>
+</body>
+</html>
