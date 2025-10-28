@@ -1,0 +1,307 @@
+/*
+  标准 CSS Reset
+  基于 Eric Meyer 的 Reset 并结合现代浏览器特性
+*/
+
+/* 所有元素应用 border-box 模型，方便布局 */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* 重置所有元素的内外边距、边框、字体等 */
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+/* HTML5 语义化元素设为块级 */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
+}
+
+/* 重置列表样式 */
+ol,
+ul {
+  list-style: none;
+}
+
+/* 重置表格样式 */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* 重置图片、视频等替换元素 */
+img,
+video,
+canvas,
+audio,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+/* 重置表单元素 */
+button,
+input,
+select,
+textarea {
+  /* 继承字体和颜色 */
+  font: inherit;
+  color: inherit;
+  /* 移除默认边框和轮廓 */
+  border: none;
+  outline: none;
+  /* 清除默认样式 */
+  background: transparent;
+  /* 统一垂直对齐 */
+  vertical-align: middle;
+}
+
+/* 链接重置 */
+a {
+  text-decoration: none;
+  color: inherit;
+  /* 继承父元素颜色 */
+}
+
+/* 防止字体缩放 */
+body {
+  line-height: 1;
+  -webkit-text-size-adjust: 100%;
+}
+
+/* 清除浮动（可选） */
+.clearfix::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+
+
+/* 业务代码 */
+body{
+  height: 100vh;
+  background: #000 url(./bg.jpg);
+}
+.starwars{
+  /* 支持3D声明 */
+  perspective: 800px;
+  /* 保持3D 变换 */
+  transform-style: preserve-3d;
+  /* 相对单位，相对于自身的字体大小
+  默认字体大小是16px，1em=16px */
+  width: 34em;
+  height: 17em;
+  /* 绝对定位 */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  /* css 调试手法 背景颜色调试大法 */
+  /* background-color:red ; */
+}
+img{
+  width:100%;
+}
+.star,.wars,.byline{
+  position: absolute;
+}
+.star{
+  top:-0.75em;
+}
+.wars{
+  bottom:-0.5em;
+}
+.byline{
+  left: -2em;
+  right:-2em;
+  top:45%;
+  /* background: green; */
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.3em;
+  font-size:1.6em;
+  color:white;
+}
+.star{
+  /* 动画属性
+  star animation-name 动作脚本
+  10s animation-duration
+  ease-out animation timing-function 
+   */
+  animation: star 10s ease-out infinite;
+}
+.wars{
+  animation: wars 10s ease-out infinite;
+}
+.byline{
+  animation:move-byline 10s linear infinite;
+}
+.byline span {
+  display: inline-block;
+  animation:spin-letter 10s linear infinite;
+}
+@keyframes move-byline {
+  0%{
+    transform:translateZ(10em);
+  }
+  100%{
+    transform:translateZ(0);
+  }
+}
+@keyframes spin-letter {
+  0%,10%{
+    opacity:0;
+    /* 跳钢管舞 */
+    transform:rotateY(90deg);
+  }
+  30%{
+    opacity: 1;
+  }
+  70%,86%{
+    transform:rotateY(0);
+    opacity: 1;
+  }
+    95%,100%{
+       opacity: 0;
+  }
+}
+/* 设计动作 动画的关键帧 */
+@keyframes star {
+  /* 每个关键帧写它的属性 */
+  0%{
+    opacity: 0;
+    transform:scale(1.5) translateY(-0.75em);
+  }
+  20%{
+    opacity:1;
+  }
+  89%{
+    opacity:1;
+    transform:scale(1);
+  }
+  100%{
+    opacity: 0;
+    transform:translateZ(-1000em);
+  }
+}
+@keyframes wars {
+    /* 每个关键帧写它的属性 */
+      0% {
+        opacity: 0;
+        transform: scale(1.5) translateY(0.5em);
+      }
+    
+      20% {
+        opacity: 1;
+      }
+    
+      90% {
+        opacity: 1;
+        transform: scale(1);
+      }
+    
+      100% {
+        opacity: 0;
+        transform: translateZ(-1000em);
+      }
+}
+
