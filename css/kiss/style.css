@@ -1,0 +1,248 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: pink;
+}
+
+.container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 238px;
+  /* background-color: white; */
+}
+
+.ball {
+  background-color: white;
+  border: 8px solid;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  display: inline-block;
+  position: relative;
+}
+
+.face {
+  width: 70px;
+  height: 30px;
+  position: absolute;
+  right: 0;
+  top: 30px;
+}
+
+/* 伪元素选择器 
+  css 声明，像html一样来用，不需要在html里面声明
+一定要有content属性 忍者 */
+/* 元素内容开始之前 */
+.face::after,
+.face::before {
+  content: "";
+  position: absolute;
+  width: 18px;
+  height: 8px;
+  background-color:pink;
+  top: 20px;
+  border-radius: 50%;
+}
+
+.face::before {
+  right: -8px;
+}
+
+/* 元素内容结束之后 */
+.face::after {
+  left: -5px;
+}
+
+.eye {
+  width: 15px;
+  height: 14px;
+  border-radius: 50%;
+  border-bottom: 5px solid;
+  position: absolute;
+}
+
+.eye-l {
+  left: 10px;
+}
+
+.eye-r {
+  right: 5px;
+}
+
+.eye-r-p {
+  border-top: 5px solid;
+  border-bottom: 0px solid;
+}
+
+.mouth {
+  width: 30px;
+  height: 14px;
+  border-radius: 50%;
+  border-bottom: 5px solid;
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  right: 0;
+  transform: translate(3px);
+  margin: auto;
+  /*平分左右的margin*/
+}
+
+/* 动画 */
+#l-ball {
+  animation: close 4s ease infinite;
+  position: relative;
+  z-index: 100;
+}
+
+@keyframes close {
+  0% {
+    transform: translate(0);
+  }
+
+  20% {
+    transform: translate(20px);
+  }
+
+  35% {
+    transform: translate(20px);
+  }
+
+  55% {
+    transform: translate(0px);
+  }
+
+  100% {
+    transform: translate(0px);
+  }
+}
+
+.face-l {
+  animation: face 4s ease infinite;
+}
+
+@keyframes face {
+  0% {
+    transform: translate(0) rotate(0);
+  }
+
+  10% {
+    transform: translate(0) rotate(0);
+  }
+
+  20% {
+    transform: translate(5px) rotate(-2deg);
+  }
+
+  28% {
+    transform: translate(0) rotate(0);
+  }
+
+  35% {
+    transform: translate(5px) rotate(-2deg);
+  }
+
+  50% {
+    transform: translate(0) rotate(0);
+  }
+
+  100% {
+    transform: translate(0) rotate(0);
+  }
+}
+
+#r-ball {
+  animation: kiss 4s ease infinite;
+}
+
+@keyframes kiss {
+  40% {
+    transform: translate(0);
+  }
+
+  50% {
+    transform: translate(30px) rotate(20deg);
+  }
+
+  60% {
+    transform: translate(-33px);
+  }
+
+  67% {
+    transform: translate(-33px);
+  }
+
+  77% {
+    transform: translate(0px);
+  }
+}
+
+.mouth-r {
+  animation: mouth-m 4s ease infinite;
+}
+
+.kiss-m {
+  position: absolute;
+  left: 20px;
+  top: 22px;
+  opacity: 0;
+  animation: kiss-m 4s ease infinite;
+}
+
+.kiss {
+  width: 13px;
+  height: 10px;
+  background-color: white;
+  border-left: 5px solid;
+  border-radius: 50%;
+}
+
+@keyframes kiss-m {
+  0% {
+    opacity: 0;
+  }
+
+  55% {
+    opacity: 0;
+  }
+
+  66% {
+    opacity: 1;
+  }
+
+  66.1% {
+    opacity: 0;
+  }
+}
+
+@keyframes mouth-m {
+  0% {
+    opacity: 1;
+  }
+
+  54.9% {
+    opacity: 1;
+  }
+
+  55% {
+    opacity: 0;
+  }
+
+  66% {
+    opacity: 0;
+  }
+
+  66.1% {
+    opacity: 1;
+  }
+}
+
+.face-r {
+  left: 0;
+  top: 37px;
+}
