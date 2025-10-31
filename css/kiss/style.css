@@ -4,7 +4,7 @@
 }
 
 body {
-  background-color: pink;
+  background-color: rgb(192, 237, 255);
 }
 
 .container {
@@ -62,7 +62,7 @@ body {
   width: 15px;
   height: 14px;
   border-radius: 50%;
-  border-bottom: 5px solid;
+  border-bottom: 5px solid;/* 仅保留底部边框形成弧线造型 */
   position: absolute;
 }
 

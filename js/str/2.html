@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>字符串模版</title>
+</head>
+
+<body>
+  <div id="todos">
+
+  </div>
+  <script>
+    const todos = [
+      {
+        id: 1,
+        text: '学习es6'
+      },
+      {
+        id: 2,
+        text: '通读你不知道的javascript'
+      }
+    ]
+    // dom 编程 
+    const todosEl = document.getElementById('todos');
+    // js 除了简单数据类型，都是对象
+    console.log(todosEl, Object.prototype.toString.call(todosEl))
+    // template string 支持换行， 在DOM html 表达中游刃有余
+    todosEl.innerHTML = `
+  <ul>
+  ${
+      // 占位符
+      // js 运行区域
+      // map 迭代数组的每一项，返回值 并返回一个新数组
+      todos.map(todo => `
+    <li>${todo.text}</li>
+    `).join("")
+    }
+  </ul>
+  `
+  </script>
+</body>
+
+</html>
