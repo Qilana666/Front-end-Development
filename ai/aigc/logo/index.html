@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+  <!-- layout 居中， 左右auto  -->
+  <div class="container">
+    <!-- 一行 -->
+    <div class="row">
+      <div class="col-md-6">
+        <form action="https://www.baidu.com" name="appForm">
+          <div class="form-group">
+            <label for="titleInput">Bot名称：</label>
+            <input placeholder="请输入名称" id="titleInput" name="title" type="text" required class="form-control">
+          </div>
+          <div class="form-group">
+            <label for="descInput">Bot描述：</label>
+            <textarea name="desc" placeholder="请输入描述" class="form-control" id="descInput" rows="3"></textarea>
+          </div>
+          <div class="form-group">
+            <button type="submit" class="btn btn-default btn-primary" id="submitBtn">生成图标</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <!-- DOM 动态插入log appenchild -->
+    <div class="row" id="logo-container"></div>
+  </div>
+  <script>
+    // form 可以用name来查找
+    // document里会自动的讲表单作为集合处理
+    const oForm = document.forms["appForm"];
+    // console.log(oForm);
+    // 事件处理函数
+    oForm.addEventListener("submit", function (event) {
+      // 事件处理函数
+      event.preventDefault()
+      // js this 可滑头了， 72变
+      // 事件处理函数，this 指向当前事件的目标元素
+      // js 一周开发出来的语言
+      console.log(this);
+
+      const appName = this["title"].value;
+      // console.log(appName);
+      const appDesc = this["desc"].value;
+      // prompt
+      const prompt = `
+    你是一个互联网大厂的设计师，需要设计一个移动应用的logo。
+    应用名称为${appName},
+    描述为${appDesc}。
+    设计一个高端、大气、上档次的logo。
+    请确保设计方案适用于移动应用图标 (App Icon)。
+    `
+      // console.log(prompt);
+      //请求方法
+      // 使用代理服务器解决CORS问题
+      fetch('https://cors-anywhere.herokuapp.com/https://api.agicto.cn/v1/images/generations', {
+        method: 'POST',
+        headers: {
+          'Authorization': 'Bearer sk-xC7StKb12GenaAl8qKdxg3ARyRF8fTAd1EyATUE8lEFWWGYZ',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          model: "dall-e-3",
+          prompt,
+          n: 1,
+          size: "1024x1024"
+        })
+      })
+        .then(response => response.json())
+        .then(data => {
+          console.log(data);
+          const img=document.createElement('img');
+          img.src=data.data[0].url;
+          img.onload=function(){
+            document.querySelector('#logo-container').appendChild(img);
+          }
+        })
+        .catch((error) => {
+          console.error('Error:', error);
+        });
+    })
+  </script>
+</body>
+
+</html>
