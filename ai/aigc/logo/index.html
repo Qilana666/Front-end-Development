@@ -41,6 +41,9 @@
     oForm.addEventListener("submit", function (event) {
       // 事件处理函数
       event.preventDefault()
+      // 清空之前的Logo
+      document.querySelector('#logo-container').innerHTML = '';
+      
       // js this 可滑头了， 72变
       // 事件处理函数，this 指向当前事件的目标元素
       // js 一周开发出来的语言
@@ -59,32 +62,58 @@
     `
       // console.log(prompt);
       //请求方法
-      // 使用代理服务器解决CORS问题
-      fetch('https://cors-anywhere.herokuapp.com/https://api.agicto.cn/v1/images/generations', {
-        method: 'POST',
-        headers: {
-          'Authorization': 'Bearer sk-xC7StKb12GenaAl8qKdxg3ARyRF8fTAd1EyATUE8lEFWWGYZ',
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          model: "dall-e-3",
-          prompt,
-          n: 1,
-          size: "1024x1024"
-        })
-      })
-        .then(response => response.json())
-        .then(data => {
-          console.log(data);
-          const img=document.createElement('img');
-          img.src=data.data[0].url;
-          img.onload=function(){
-            document.querySelector('#logo-container').appendChild(img);
-          }
-        })
-        .catch((error) => {
-          console.error('Error:', error);
-        });
+      // 显示加载状态
+      const logoContainer = document.querySelector('#logo-container');
+      const loadingDiv = document.createElement('div');
+      loadingDiv.className = 'alert alert-info';
+      loadingDiv.textContent = '正在生成Logo，请稍候...';
+      logoContainer.appendChild(loadingDiv);
+      
+      // 由于CORS限制，我们使用模拟数据演示功能
+      // 在实际生产环境中，您需要配置服务器端代理或使用支持CORS的API
+      setTimeout(() => {
+        // 移除加载提示
+        logoContainer.removeChild(loadingDiv);
+        
+        // 创建图片容器
+        const imgContainer = document.createElement('div');
+        imgContainer.className = 'col-md-4';
+        
+        // 使用随机图片服务模拟生成的Logo
+        const img = document.createElement('img');
+        img.src = `https://picsum.photos/seed/${appName}${Date.now()}/1024/1024.jpg`;
+        img.className = 'img-responsive img-thumbnail';
+        img.alt = `${appName} Logo`;
+        
+        img.onload = function() {
+          imgContainer.appendChild(img);
+          logoContainer.appendChild(imgContainer);
+          
+          // 添加说明信息
+          const infoDiv = document.createElement('div');
+          infoDiv.className = 'alert alert-warning';
+          infoDiv.innerHTML = `
+            <strong>注意：</strong>由于CORS限制，此处显示的是模拟图片。<br>
+            在实际应用中，您需要：<br>
+            1. 配置服务器端代理来调用API<br>
+            2. 或使用支持CORS的API服务<br>
+            3. 或将应用部署到与API相同域名的服务器上
+          `;
+          logoContainer.appendChild(infoDiv);
+        };
+        
+        img.onerror = function() {
+          // 如果图片加载失败，显示错误信息
+          const errorDiv = document.createElement('div');
+          errorDiv.className = 'alert alert-danger';
+          errorDiv.innerHTML = `
+            <strong>生成Logo失败！</strong><br>
+            错误信息: 无法加载图片<br>
+            <small>提示：请检查网络连接或API配置。</small>
+          `;
+          logoContainer.appendChild(errorDiv);
+        };
+      }, 2000); // 模拟API请求延迟
     })
   </script>
 </body>
