@@ -1,0 +1,8 @@
+<view class="container">
+  <view class="search">
+    <van-search placeholder="搜索" background="#49b849"/>
+  </view>
+  <view class="weui-grids">
+  1
+  </view>
+</view>
