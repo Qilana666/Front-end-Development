@@ -1,0 +1,122 @@
+/*全局样式*/
+page {
+  background: #f8f8f8;
+  line-height: 1.5;
+  /*小程序解决适配的利器
+  根据设计稿750px， 直接写成rpx
+  像素？ 一个发光源
+  2xRetina 1个像素点下有两个物理发光源
+  */
+  font-size: 32rpx;
+}
+
+.section {
+  height: 100vh;
+}
+.hero.white {
+  background: white;
+}
+
+image {
+  display: block;
+  width: 100%;
+}
+.hero image {
+  height: 38.2vh;
+}
+/* hero 作用  换主题*/
+.hero .content {
+  padding-top:10%;
+}
+
+.hero .content.center{
+  text-align: center;
+} 
+
+.hero .sub-header {
+  font-size: 32rpx;
+  text-transform: uppercase;
+  letter-spacing: 2rpx;
+  margin-bottom: 16rpx;
+  color: rgba(0, 0, 0, 0.85);
+}
+.hero .header {
+  font-size: 72rpx;
+  font-weight: bold;
+  margin: 0 12% 16rpx;
+}
+.hero .description {
+  padding: 0 12%;
+  margin-bottom: 64rpx;
+}
+
+/* .action {
+  text-align: center;
+  padding: 96rpx;
+} */
+
+.action {
+  display: flex;                    /* 关键：启用 flex */
+  justify-content: center;         /* 水平居中 */
+  gap: 20rpx;                       /* 按钮间距 */
+  padding: 96rpx 0;                 /* 上下内边距 */
+}
+
+.button {
+  display: inline-block;
+  margin: 8rpx;
+  background: #e0e1e2;
+  padding: 48rpx;
+  color: rgba(0,0,0,0.6);
+  font-weight: bold;
+  border-radius: 2rpx;
+  font-size: 32rpx;
+  transition: .3s all;
+}
+.button.primary {
+  background: #000000;
+  color: rgba(255, 255, 255, 0.9);
+}
+.cards {
+  padding: 32rpx;
+}
+.card {
+  background: #fff;
+  margin-bottom: 32rpx;
+  transition: 0.5s all;
+}
+.card image {
+  position: relative;
+  height: 36vh;
+}
+.card .content{
+  padding:48rpx 48rpx 64rpx;
+}
+.card .header{
+  font-size:48rpx;
+  font-weight:bold;
+  letter-spacing:2rpx;
+  margin-bottom:48rpx;
+  position:relative;
+}
+.card .header::after{
+  content:"";
+  position:absolute;
+  bottom:-20rpx;
+  bottom:0;
+  left:0;
+  width:80rpx;
+  border-bottom:4rpx solid #000;
+  padding-bottom: 16rpx;
+}
+.card .sub-header{
+  font-size:32rpx;
+  letter-spacing:3rpx;
+  text-transform:uppercase;
+}
+
+.cars .description, .card .meta{
+  margin-bottom:16rpx;
+  color:rgba(0,0,0, 0.85);
+  font-size: 32rpx;
+}
