@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="theme.css">
+  <style>
+    /* id 100分 */
+    #p7{
+      color: pink;
+    }
+    /* 选择器优先级 类名 10分*/
+     /* 2. class 选择器：.highlight 是绿色 */
+    .highlight {
+      color: green;
+    }
+    /* 标签选择器 1分*/
+    p {
+      color: blue;
+    }
+    /* 加！important 无限多 */
+    /* p {
+      color: blue!important;
+    } */
+    /* 3. 内联样式（在 HTML 中）：红色 1000分*/
+  </style>
+</head>
+<body>
+  <p class="hightlight" id="p7" style="color: red;">
+    这是一个高亮段落，颜色为红色。
+  </p>
+</body>
+</html>

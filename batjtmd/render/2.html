@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HTML5语义化标签--SEO</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      line-height: 1.5;
+      background-color: #f4f4f4;
+    }
+
+    header {
+      background-color: #333;
+      color: white;
+      padding: 1rem;
+      text-align: center;
+    }
+
+    .container {
+      display: flex;
+      /* css 内置函数 */
+      min-height: calc(100vh-120px);
+    }
+
+    main {
+      flex: 1;
+      /*主内容区域 其它元素占完后，余下的都是主元素的*/
+      background: #fff;
+      padding: 1.5rem;
+    }
+
+    aside {
+      width: 250px;
+      background-color: #ecf0f1;
+      padding: 1.5rem;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>HTML5语义化标签--刘翔平的技术博客</h1>
+  </header>
+  <div class="container">
+    <main>
+      <section>
+        <h2>主要内容</h2>
+        <p>这里是页面的核心内容区域
+          <code>&lt;main&gt;</code>
+          和<code>&lt;section&gt;</code>
+          标签表现结构清晰
+        </p>
+        <p>HTML5的语义标签有助于SEO和无障碍访问</p>
+
+      </section>
+    </main>
+    <aside class="aside-left">
+      <h3>左侧边栏</h3>
+      <p>导航链接、目录和广告位</p>
+      <ul>
+        <li>首页</li>
+        <li>关于</li>
+        <li>联系</li>
+      </ul>
+    </aside>
+    <aside class="aside-right">
+      <h3>右侧侧边栏</h3>
+      <p>相关文章、推荐内容</p>
+    </aside>
+  </div>
+  <footer>
+    <p>&copy;2025 刘翔平. All rights reserved.</p>
+  </footer>
+</body>
+
+</html>
