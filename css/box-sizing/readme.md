@@ -21,5 +21,6 @@
 
 - 怪异盒模型
   box-sizing: border-box;
+  <!-- 元素的 width 和 height 应用于内容区域、内边距和边框。 -->
   box-sizing=内容+padding+border=w/h
   盒子的计算
