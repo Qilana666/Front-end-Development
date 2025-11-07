@@ -1,0 +1,41 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/theme/theme",
+    "pages/logs/logs",
+    "pages/search/search",
+    "pages/articles/articles"
+  ],
+  "window": {
+    "backgroundColor": "#49b849",
+    "navigationBarTextStyle": "white",
+    "navigationBarTitleText": "博客园",
+    "navigationBarBackgroundColor": "#49b849"
+  },
+  "tabBar": {
+    "backgroundColor": "#ffffff",
+    "borderStyle": "white",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "/images/tb11.png",
+        "selectedIconPath": "/images/tb12.png"
+      },
+      {
+        "pagePath": "pages/theme/theme",
+        "text": "主题",
+        "iconPath": "/images/tb21.png",
+        "selectedIconPath": "/images/tb22.png"
+      }
+    ]
+  },
+  "style": "v2",
+  "componentFramework": "glass-easel",
+  "sitemapLocation": "sitemap.json",
+  "lazyCodeLoading": "requiredComponents",
+  "usingComponents": {
+    "van-button": "@vant/weapp/button",
+    "van-search": "@vant/weapp/search"
+  }
+}
