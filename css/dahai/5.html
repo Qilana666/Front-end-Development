@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    /* 子元素有点乱的时候，nth-child 会根据所有子元素的序号来选择，而 nth-of-type 会根据指定元素的序号来选择 */
+    .container p:nth-child(2){
+      background-color: yellow;
+      color: red;
+    }
+    .container p:nth-of-type(3){
+      background-color: rgb(217, 0, 255);
+      color: rgb(60, 0, 255);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>nth-child vs nth-of-type 实例</h1>
+    <p>这是一个段落。</p>
+    <div>这是一个div。</div>
+    <p>这是第二个段落。</p>
+    <p>这是第三个段落。</p>
+    <div>这是第二个div。</div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    *{
+      margin: 0;
+      padding: 0;
+    }
+    /* 基础样式 */
+    .book{
+      margin: 10px;
+      padding:15px;
+      border:1px solid #ccc;
+    }
+    [data-category="科幻"]{
+      background-color: #007bff;
+      color:rgb(28, 101, 2);
+    }
+    [data-category="历史"]{
+      background-color: #ffee00;
+      color:rgb(101, 2, 37);
+    }
+    [title^="入门"] h2::before{
+      /* ::before
+        伪元素，在选中的 <h2> 元素内容前插入一个虚拟元素。
+        需配合 content 属性使用才会显示。 */
+      content: "🌟";
+      margin-right: 5px;
+      font-size: 1.2em;
+      /* 16*1.2px */
+    }
+  </style>
+</head>
+<body>
+  <!-- .book[data-category=""]>(h2+p) -->
+  <!-- (.book[data-category=""]>(h2+p))*4 -->
+   <!-- 选择所有 class="book" 且 data-category 属性值为空字符串的元素，然后选中该元素的直接子元素中的 h2 元素和 p 元素。 -->
+  <div class="book" data-category="科幻">
+    <h2>三体</h2>
+    <p>作者：刘慈欣</p>
+  </div>
+  <div class="book" data-category="历史">
+    <h2>明朝那些事</h2>
+    <p>作者：当年明月</p>
+  </div>
+  <div class="book" data-category="小说">
+    <h2>活着</h2>
+    <p>作者：余华</p>
+  </div>
+  <div class="book" data-category="语言学习" title="入门日语初级课程">
+    <h2>日语初级课程</h2>
+    <p>学习日常对话和基本语法</p>
+  </div>
+</body>
+</html>

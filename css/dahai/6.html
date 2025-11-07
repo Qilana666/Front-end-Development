@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>伪元素</title>
+  <style>
+    .container{
+      max-width: 600px; /* 适配 移动端用自己的宽度  PC端 mw 做到pc端和移动端的适配*/
+      margin: 0 auto; /* 左右水平居中 */
+      padding:20px;
+      font-family: Arial, sans-serif;
+    }
+    h1{
+      text-align:center;
+    }
+    p{
+      line-height:1.6;
+    }
+    .more{
+      /* css格式化上下文 定义元素的布局规则*/
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: #fff;
+      text-decoration: none;
+      position:relative;
+      transition: all .3s ease;/* 过渡动画 */
+    }
+    .more::before{
+      content: "";
+      position:absolute;
+      bottom:0;
+      left:0;
+      width: 100%;
+      height: 2px;
+      background-color: rgb(128, 128, 128);
+      transform: scaleX(0);
+      transform-origin: bottom left;
+      transition: transform .3s ease;
+    }
+    .more:hover::before{
+      transform: scaleX(1);
+    }
+    /* .more:hover{
+      background-color: #0056b3;
+      transform: translateX(5px);
+    } */
+
+    .more::after{
+      content:"\2192";
+      margin-left:5px;
+      transition: transform .3s ease;
+    }
+    .more:hover::after{
+      transform: translateX(5px);/* 向x正方向走 向右 */ 
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>示例标题</h1>
+    <p>这是一个段落，</p>
+    <a href="#" class="more">查看更多</a>
+  </div>
+</body>
+
+</html>

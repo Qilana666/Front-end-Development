@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>选择器</title>
+  <style>
+    /* 选择器一定会选择最后的元素
+    直接相邻的选择器 */
+    h1+p{
+      color: red;
+    }
+
+
+    /* 相邻兄弟选择器*/
+    p+p{
+      color: pink;
+    }
+
+
+    /* 通用兄弟选择器 */
+    h1~p{
+      color: blue;
+    }
+
+
+    /* >选择子元素  不选孙子*/
+    .container > p{
+      color: yellow;
+    }
+
+    
+    /* 空格是后代选择器 */
+    .container p{
+      text-decoration:underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <p>这是h1前面的文字。</p>
+    <h1>标题</h1>
+    <p>这是第一段文字。</p>
+    <p>这是第二段文字。</p>
+    <a href="#">链接</a>
+    <span>这是一个span元素。</span>
+    <div class="inner">
+      <p>这是内部段落。</p>
+    </div>
+  </div>
+</body>
+</html>
