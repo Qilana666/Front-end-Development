@@ -13,4 +13,4 @@ http.createServer((req, res) => {
 }).listen(3000);
 //监听3000端口
 //用户请求 3000端口 ，会被服务器端处理
-//用户  chrome  http://localhost:3000
+//用户  chrome  http://localhost:3000  路由 http://localhost:3000/users/123
