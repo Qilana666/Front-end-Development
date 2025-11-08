@@ -22,12 +22,15 @@
       outline: none;
     }
     input:checked+label{
+      /* 相邻的 选择label 选中的input */
       font-weight:bold;
     }
     li:not(:last-child){
+      /* 选择所有 li 元素，除了最后一个 */
       margin-bottom: 10px;
     }
     li:nth-child(odd){
+      /* 选择所有 li 元素，索引为奇数的元素 */
       background-color: lightgray;
     }
   </style>
