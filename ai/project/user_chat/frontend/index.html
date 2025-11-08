@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Users Chatbot</title>
+  <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+  <!-- PC端页面框架 
+    bootstrap Layout 行列 
+    列的布局， 总共12个单位， 
+  col-md-6 一半
+
+  -->
+  <div class="container">
+    <div class="row col-md-6 col-md-offset-3">
+      <table class="table table-striped" id="user_table">
+        <!-- 表头 -->
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>姓名</th>
+            <th>家乡</th>
+          </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+      </table>
+    </div>
+    <div class="row">
+      <form name="aiForm">
+        <div class="form-group">
+          <label for="questionInput">请输入问题：</label>
+          <input type="text" class="form-control" id="questionInput" name="question" required placeholder="请输入问题">
+        </div>
+        <div class="form-group">
+          <button type="submit" class="btn btn-primary">提交</button>
+        </div>
+      </form>
+    </div>
+    <div class="row" id="message"></div>
+  </div>
+  <script>
+    const oForm = document.forms["aiForm"];
+    const oBody = document.querySelector('#user_table ');
+    const oBtn = document.querySelector(".btn");
+    let users;
+
+    oForm.addEventListener("submit", (event) => {
+      event.preventDefault();
+      const question = oForm["question"].value;
+      // console.log(question);
+      // llm api 请求
+      if (!question) {
+        alert("请输入问题");
+        return;
+      }
+      oBtn.disabled = true;
+      console.log(`http://localhost:1314/?question=${question}&data=${JSON.stringify(users)}`);
+      fetch(
+        `http://localhost:1314/?question=${question}&data=${JSON.stringify(users)}`
+      ).then(res => res.json())
+        .then(data => {
+          console.log(data);
+          oBtn.disabled = false;
+          document.getElementById('message').innerHTML = data.result;
+        })
+    })
+
+    // 前(用户哪里，全球各地)后（机房）端通信
+    // js fetch 主动的向后端发起请求
+    fetch('http://localhost:3001/users')
+      // 数据到达后， then 接着做
+      // res 二进制数据， 转换为 json 格式
+      .then(res => res.json())
+      .then(data => {
+        // console.log(data);
+        users = data;
+        // console.log(users, '////');
+        oBody.innerHTML = data.map(user => `
+        <tr>
+          <td>${user.id}</td>
+          <td>${user.username}</td>
+          <td>${user.hometown}</td>
+        </tr>
+      `).join("")
+      })
+  </script>
+</body>
+
+</html>
