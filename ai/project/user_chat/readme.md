@@ -20,3 +20,4 @@
       npm run dev
       json-server --watch users.json --port 3001
   - llm
+  - 要实现项目的正常交互，前端后端，LLm 服务都需要启动
