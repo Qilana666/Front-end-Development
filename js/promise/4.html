@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <ul id="members"></ul>
+  <script>
+    console.log(fetch('https://api.github.com/orgs/lemoncode/members'));
+    // fetch('https://api.github.com/orgs/lemoncode/members')
+    //   .then(data=>data.json())
+    //   .then(res=>{
+    //     //就得等 res 处理完成
+    //     // console.log(res);
+    //     document.getElementById('members').innerHTML =
+    //      res.map(item=>`<li>${item.login}</li>`).join('')
+    //   })
+  </script>
+</body>
+</html>

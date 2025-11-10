@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // 1, 2, 3
+    // 异步， 变同步
+    console.log(1);
+    // Promise 异步任务同步化
+    // 许诺 Promise 包含一个耗时性的任务 
+    const p = new Promise((resolve) => {
+      // 执行
+      setTimeout(function () {
+        console.log(2);
+        resolve();
+      }, 8000)
+    })
+
+    p.then(() => {
+      console.log(3);
+    })
+    console.log(4);
+
+  </script>
+</body>
+
+</html>
