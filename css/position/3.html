@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fixed固定定位实例</title>
+  <style>
+    *{
+      padding:0;
+      margin:0;
+    }
+    .parent{
+      width:500px;
+      height:500px;
+      background-color:pink;
+    }
+    .box{
+      width:100px;
+      height:100px;
+      background-color:green;
+    }
+    .child{
+      width:300px;
+      height:200px;
+      background-color:blue;
+      position:fixed;
+      right:100px;
+      bottom:100px;
+    }
+    .body{
+      height:2000px;
+
+    }
+  </style>
+</head>
+<body>
+  <div class="parent">
+    <div class="child"></div>
+  </div>
+  <div class="box">Hello World</div>
+</body>
+</html>

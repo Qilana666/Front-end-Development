@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sticky滚动定位实例</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
+
+    .parent {
+      width: 500px;
+      height: 500px;
+      background-color: pink;
+    }
+    .child {
+      width: 300px;
+      height: 200px;
+      background-color: blue;
+    }
+    .box {
+      width: 100px;
+      height: 100px;
+      background-color: green;
+      position: sticky;      /* 黏连定位，是相对于最近的有定位的父元素进行定位 */
+      top: 100px;
+    }
+    .body {
+      height: 2000px;
+    }
+
+
+  </style>
+</head>
+
+<body>
+  <div class="parent">
+    <div class="child"></div>
+  </div>
+  <div class="box">Hello World</div>
+  
+  <!-- 添加更多内容以增加页面高度 -->
+  <div style="margin-top: 500px;">
+    <p>滚动页面查看sticky定位效果</p>
+    <p>绿色方块应该在距离顶部100px时固定</p>
+  </div>
+  
+  <!-- 添加更多内容以确保页面足够长 -->
+  <div style="height: 1500px; background: linear-gradient(to bottom, #f0f0f0, #e0e0e0); padding: 20px;">
+    <h2>滚动区域</h2>
+    <p>继续滚动以查看效果...</p>
+    <p>当绿色方块到达距离顶部100px的位置时，它应该会"粘"在那里</p>
+    <p>即使继续滚动，它也应该保持在视窗中的固定位置</p>
+  </div>
+</body>
+
+</html>
