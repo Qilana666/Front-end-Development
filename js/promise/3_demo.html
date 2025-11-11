@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Promise 文件读取演示</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    .console-output {
+      background-color: #f5f5f5;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      padding: 15px;
+      margin: 20px 0;
+      font-family: monospace;
+      white-space: pre-wrap;
+      max-height: 300px;
+      overflow-y: auto;
+    }
+    .log {
+      margin: 5px 0;
+    }
+    .log-1 { color: #333; }
+    .log-2 { color: #333; }
+    .log-3 { color: #333; }
+    .log-error { color: #d32f2f; }
+    .log-success { color: #388e3c; }
+    button {
+      background-color: #4CAF50;
+      border: none;
+      color: white;
+      padding: 10px 15px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin: 4px 2px;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+    .code-block {
+      background-color: #f8f8f8;
+      border-left: 4px solid #4CAF50;
+      padding: 10px 15px;
+      margin: 15px 0;
+      font-family: monospace;
+      overflow-x: auto;
+    }
+  </style>
+</head>
+<body>
+  <h1>Promise 文件读取演示</h1>
+  
+  <p>这个页面演示了3.js中的Promise概念，模拟了文件读取操作和错误处理。</p>
+  
+  <button id="runDemo">运行演示</button>
+  <button id="clearOutput">清空输出</button>
+  
+  <div class="code-block">
+    <pre>const p = new Promise((resolve, reject) => {
+  console.log(3); // 同步，立即执行
+  
+  // 模拟文件读取操作
+  setTimeout(() => {
+    const success = Math.random() > 0.5; // 50%概率成功
+    if (success) {
+      resolve("文件内容: hello world");
+    } else {
+      reject(new Error("文件不存在: b.txt"));
+    }
+  }, 1000);
+});
+
+p.then((data) => {
+  console.log(data, '读取文件成功');
+}).catch((err) => {
+  console.log(err, '读取文件失败');
+});
+
+console.log(2); // 同步</pre>
+  </div>
+  
+  <h3>控制台输出:</h3>
+  <div id="consoleOutput" class="console-output"></div>
+  
+  <script>
+    const consoleOutput = document.getElementById('consoleOutput');
+    const runDemoBtn = document.getElementById('runDemo');
+    const clearOutputBtn = document.getElementById('clearOutput');
+    
+    function logToConsole(message, className = '') {
+      const logElement = document.createElement('div');
+      logElement.className = `log ${className}`;
+      logElement.textContent = message;
+      consoleOutput.appendChild(logElement);
+      
+      // 自动滚动到底部
+      consoleOutput.scrollTop = consoleOutput.scrollHeight;
+    }
+    
+    function clearConsole() {
+      consoleOutput.innerHTML = '';
+    }
+    
+    function runDemo() {
+      clearConsole();
+      
+      // 模拟3.js中的代码
+      logToConsole('1', 'log-1');
+      
+      // 实例化Promise
+      const p = new Promise((resolve, reject) => {
+        logToConsole('3', 'log-3'); // 同步，立即执行
+        
+        // 模拟文件读取操作
+        setTimeout(() => {
+          const success = Math.random() > 0.5; // 50%概率成功
+          if (success) {
+            logToConsole('模拟读取文件成功', 'log-success');
+            resolve("文件内容: hello world");
+          } else {
+            const error = new Error("文件不存在: b.txt");
+            logToConsole('模拟读取文件失败', 'log-error');
+            reject(error);
+          }
+        }, 1500);
+      });
+      
+      p.then((data) => {
+        logToConsole(`${data} 读取文件成功`, 'log-success');
+      }).catch((err) => {
+        logToConsole(`${err.message} 读取文件失败`, 'log-error');
+      });
+      
+      logToConsole('2', 'log-2');
+    }
+    
+    runDemoBtn.addEventListener('click', runDemo);
+    clearOutputBtn.addEventListener('click', clearConsole);
+    
+    // 页面加载时自动运行一次演示
+    window.addEventListener('load', () => {
+      setTimeout(runDemo, 500);
+    });
+  </script>
+</body>
+</html>
