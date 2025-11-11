@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSS4 变量</title>
+  <style>
+    /* 选中根元素， html 
+    声明变量 css 
+  */
+    :root {
+      /* 好多地方都可以用
+      改一个地方， 所有的都可以改变 
+    */
+      --spacing: 10px;
+      --blur: 10px;
+      --base: #ffc600;
+    }
+
+    img {
+      padding: var(--spacing);
+      background: var(--base);
+      filter: blur(var(--blur));
+    }
+
+    .controls {
+      padding: var(--spacing);
+
+    }
+
+    .hl {
+      color: var(--base);
+
+    }
+  </style>
+</head>
+
+<body>
+  <h2>Update Css Variables with <span class="hl">JS</span></h2>
+  <div class="controls">
+    <!-- 无障碍访问 -->
+    <label for="spacing">Spacing:</label>
+    <!-- html5 新特性表单元素 -->
+    <input type="range" id="spacing" name="spacing" min="10" max="200" value="10" data-sizing="px">
+
+    <label for="blur">Blur:</label>
+    <input type="range" id="blur" name="blur" min="0" max="25" value="10" data-sizing="px">
+
+    <label for="base">Base Color:</label>
+    <input type="color" id="base" name="base" value="#ffc600">
+  </div>
+  <img src="https://img1.baidu.com/it/u=1286495993,1977676821&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500">
+  <script>
+    const inputs = document.querySelectorAll('.controls input');
+    inputs.forEach(input => input.addEventListener('change', handleUpdate));
+
+    function handleUpdate() {
+      //this 指向？ 事件处理的时候，指向事件发生的元素
+      console.log(this);
+      const suffix = this.dataset.sizing || ''; // 以data开头的所有属性
+      console.log(suffix);
+      document.documentElement.style.setProperty(`--${this.name}`, this.value + suffix);
+      //setProperty 是 CSSStyleDeclaration 接口的一个方法，它用于动态设置一个 CSS(->style) 属性的值。
+    }
+  </script>
+</body>
+
+</html>
