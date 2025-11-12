@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ajax 数据请求</title>
+  <!--Ajax:Asynchronous JavaScript and XML”（异步 JavaScript 和 XML） -->
+</head>
+<body>
+  <ul id="members"></ul>
+  <script>
+    //js 异步主动请求数据 界面的动态更新
+    //fetch 是个promise的实例，专门用来做数据请求
+    // console.log(fetch('https://api.github.com/orgs/lemoncode/members'))
+    //url 接口地址
+    //网络请求 request
+    //response 响应
+    //toJSON
+    //dom 操作
+    //httpRequest XML? 可以主动发起http 请求响应是(XML) JSON的对象
+    const xhr=new XMLHttpRequest();
+    console.log(xhr.readyState, '------');
+    //打开一个请求
+    //false 同步 true 异步
+    xhr.open('GET','https://api.github.com/orgs/lemoncode/members',false);// true 表示异步
+    //true 的含义：在 xhr.open() 中，true 代表异步执行。
+    // 这意味着浏览器在发送 HTTP 请求后，不会等待服务器响应，而是立即继续执行后续的 JavaScript 代码。
+    // 当响应返回时，会通过指定的回调函数（如 onload）来处理结果。
+
+    //真正发送出去
+    console.log(xhr.readyState,'|------');
+    xhr.send();
+    console.log(xhr.readyState, '|---|---');
+    //事件监听
+    console.log('//////')
+    console.log(xhr.responseText);
+    // xhr.onreadystatechange=function(){
+      console.log(xhr.readyState, '|---|---|');
+      //响应的状态码
+      //readyState 4 表示请求完成
+      if(xhr.status===200&&xhr.readyState===4){
+        console.log(xhr.responseText);
+        const data=JSON.parse(xhr.responseText);
+        console.log(data);
+        document.getElementById('members').innerHTML=
+          data.map(item=>`<li>${item.login}</li>`).join('');
+      }
+    
+  </script>
+</body>
+</html>
