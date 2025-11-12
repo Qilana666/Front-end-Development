@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <!-- 背景圆形 -->
+  <circle cx="64" cy="64" r="60" fill="#2ECC40"/>
+  <!-- 小圆形装饰 -->
+  <circle cx="34" cy="34" r="10" fill="#27AE60"/>
+  <circle cx="94" cy="34" r="10" fill="#27AE60"/>
+  <!-- 简化的Hulk拳头标志 -->
+  <path d="M40,80 C40,60 88,60 88,80 L80,95 L48,95 Z" fill="#27AE60"/>
+  <path d="M50,82 C50,70 78,70 78,82 L72,90 L56,90 Z" fill="#229954"/>
+</svg>

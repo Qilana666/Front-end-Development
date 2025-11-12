@@ -1,0 +1,22 @@
+{
+  "manifest_version": 3,
+  "name": "Hulk 绿色背景扩展",
+  "version": "1.0",
+  "description": "将网页背景改为绿色的Chrome扩展",
+  "action": {
+    "default_icon": "icons/hulk_icon.svg",
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "16": "icons/hulk_icon.svg",
+    "48": "icons/hulk_icon.svg",
+    "128": "icons/hulk_icon.svg"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"]
+    }
+  ],
+  "permissions": ["activeTab"]
+}
