@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>手写sleep函数</title>
+</head>
+
+<body>
+    <script>
+        // sleep 休息一会儿 
+        // then
+        function sleep(n) {
+            let p;
+            p = new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    // pending 等待
+                    console.log(p, '////');
+                    reject();
+                    // fulfilled 成功
+                    // rejected 失败
+                    console.log(p);
+                }, n);
+            });
+            return p;
+        }
+        sleep(3000)
+            .then(() => {
+                console.log('/////')
+            })
+            .catch(() => {
+                console.log('error')
+            })
+    </script>
+</body>
+
+</html>

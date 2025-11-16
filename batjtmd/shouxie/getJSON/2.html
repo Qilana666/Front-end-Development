@@ -1,24 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>封装一个getjson函数</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
 </head>
+
 <body>
-  <script>
-    function getJSON(url){
-      const p=new Promise((resolve,reject)=>{
-        //executor 执行器函数 同步
-        //将耗时的异步任务放在里面
-        const xhr=new XMLHTTPRequest();
-      })
-      return p; 
-    }
-    //promise 是es6提供的异步编程解决方案，优于回调函数
-    //promise 实例 then
-    getJSON('https://api.github.com/users/shunwuyu')
-      .then(data => console.log(data));
-  </script>
+    <script>
+        const getJSON = (url) =>
+            new Promise((resolve, reject) => {
+                // executor 执行器函数 同步
+                // 将耗时的异步任务放在里面
+                const xhr = new XMLHttpRequest();
+                xhr.open('GET', url, true);
+                xhr.send();
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState === 4 && xhr.status === 200) {
+                        // 数据  xhr/fetch 数据交换的格式 json  -->
+                        const data = JSON.parse(xhr.responseText);
+                        resolve(data); // 成功 
+                    }
+                }
+                xhr.onerror = function () {
+                    reject('出错了')
+                }
+            });
+
+        // promise 是es6提供的异步编程解决方案，优于回调函数
+        // promise 实例 then 
+        getJSON('https://ap.github.com/users/shunwuyu')
+            // promise
+            // promise 实例 resolve 后运行
+            .then((data) => {
+                console.log(data);
+            })
+            .catch(err => {
+                console.log(err);
+            })
+            .finally(() => {
+                // promise 状态丛 pending 到了 fullfilled 或 rejected
+                console.log('finally');
+            })
+    </script>
 </body>
+
 </html>

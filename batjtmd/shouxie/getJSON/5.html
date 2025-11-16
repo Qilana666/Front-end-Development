@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        const arr = [1, 2, 3, 4, 5, 6];
+        const arr3 = arr.concat([]);
+        arr3[0] = 0;
+        console.log(arr, arr3);
+        // 重新申请一块空间 开销大
+        const arr2 = JSON.parse(JSON.stringify(arr));// 引用式拷贝
+        arr2[0] = 0;
+        console.log(arr, arr2);
+    </script>
+</body>
+
+</html>
