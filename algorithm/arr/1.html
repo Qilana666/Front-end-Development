@@ -1,0 +1,16 @@
+<script>
+  // arr 在栈内存中  引用地址
+  // [1,2,3] 在堆内存中 
+  // 数组的创建， 申请了6个单位的连续空间，
+  // 数组里面的值也确定了吧
+  // const arr = [1,2,3,4,5,6];
+  // 构造函数，创建了空数组
+  // const arr = [];
+  // const arr = new Array();
+  // 创建一个长度确定，同时每一个元素的值也确定的
+
+  const arr2 = new Array(6);
+  // console.log(arr2) empty*6
+  const arr = (new Array(6)).fill(0);
+  console.log(arr);
+</script>
