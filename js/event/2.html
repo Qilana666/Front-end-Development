@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>事件委托</title>
+</head>
+<body>
+  <ul id="list">
+    <li>1</li>
+    <li>2</li>
+    <li>3</li>
+  </ul>
+  <script>
+    //内存开销大
+    // const lis=document.querySelectorAll('#list li');
+    // console.log(lis);
+    // for(let i=0;i<lis.length;i++){
+    //   lis[i].addEventListener('click',function(){
+    //     console.log(this.innerHTML);
+    //   })
+    // }
+
+    document.getElementById('list').addEventListener('click',function(event){
+      //冒泡阶段 li 任何一个都会触发 n个 li 事件节省为一个
+      console.log('-----');
+      console.log(event.target,event.target.innerHTML);
+    })
+  </script>
+</body>
+</html>

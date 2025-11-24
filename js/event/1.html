@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JS 事件机制</title>
+  <style>
+    #parent {
+      width: 200px;
+      height: 200px;
+      background-color: red;
+    }
+
+    #child {
+      width: 100px;
+      height: 100px;
+      background-color: blue;
+    }
+  </style>
+</head>
+
+<body onload="alert('hello world')">
+  <div id="parent">
+    <div id="child"></div>
+  </div>
+  <script>
+    document.getElementById('parent').addEventListener('click', function () {
+      console.log('parent click');
+    },false)
+    // 在 JavaScript 里，你可以选择使用捕获还是冒泡来监听事件。
+    // 比如addEventListener这个方法，第三个参数如果是true就表示使用捕获机制，
+    // 如果是false（或者不写，默认就是false）就表示使用冒泡机制。
+    document.getElementById('child').addEventListener('click', function (event) {
+      event.stopPropagation();//停止冒泡
+      console.log('clild click');
+    },false)
+  </script>
+</body>
+
+</html>
