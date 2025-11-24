@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    //简单数据类型 不能用new 关键字创建实例
+    //构造函数，代码可读性
+    // const wes=new Symbol('王大帅'); // TypeError: Symbol is not a constructor
+    const person = Symbol('wes'); 
+    // console.log(person); // Symbol(wes)
+    // console.log(wes==person); // false
+    const classRoom={
+      [Symbol('Mark')]:{ grade:50,gender:'male'},
+      [Symbol('Luna')]:{ grade:18, gender:'female'},
+      [Symbol('Luna')]:{ grade:20, gender:'female'},
+      "dl":["乡","扬"]
+    }
+    // console.log(classRoom);
+
+    // 遍历对象  for key in
+    //Symbol key  不会被覆盖
+    // for key in  不可以被枚举
+    for (const person in classRoom) {
+      console.log(person);
+    }
+
+    const syms=Object.getOwnPropertySymbols(classRoom);
+    console.log(syms);
+    const data=syms.map(sym=>classRoom[sym]);//箭头指向的就是返回值
+    console.log(data);
+  </script>
+</body>
+</html>
