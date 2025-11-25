@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // es6
+    class Person{
+      constructor(name,age){
+        this.name=name;
+        this.age=age;
+      }
+      sayHi(){
+        console.log(`你好，我是${this.name}`);
+      }
+    }
+
+    //es5 没有class 抽像一个类的模版（属性和方法）
+    //属性 构造函数
+    // function Person(){
+    //   this.name=name;
+    //   this.age=age;
+    // }
+    // Person.prototype={
+    //   speci:'人',
+    //   sayHi:function(){
+    //     console.log(`你好，我是${this.name}`);
+    //   }
+    // }
+    const su=new Person('王老板',19);//实例
+    console.log(su.__proto__==Person.prototype);
+    console.log(Person.prototype.constructor=Person);
+    //对象的原型对象是？
+    console.log(Object.getPrototypeOf(su)==Person.prototype);
+  </script>
+</body>
+</html>

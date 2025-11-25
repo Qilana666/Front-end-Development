@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // person.prototype 也是函数是对象的表现
+    //constructor + prototype = 抽像的类
+    //抽像函数
+    function Person(name, age) {
+      this.name = name;
+      this.age = age;
+    }
+    Person.prototype={
+      speci:'人'
+      }
+    
+    var su=new Person('舒老板',19);//实例  是个对象
+    console.log(su.__proto__==Person.prototype);
+    //构造函数
+    console.log(Person==Person.prototype.constructor,Person.prototype.constructor);
+  </script>
+</body>
+</html>

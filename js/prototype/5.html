@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    function Person(){
+      Person.prototype.speci='人';
+      Person.prototype.sayHi=function(){
+        console.log(`你好，我是${this.name}`);
+      }
+    }
+    var su=new Person('舒老板',19);//实例
+    //原型对象独立于实例对象之外
+    su.speci='大老板';
+    //如果实例上有属性，就不会去原型上找
+    console.log(su,su.speci,su.__proto__);
+    //实例对象 。。。原型对象
+    // { speci: '大老板' } 大老板 { speci: '人', sayHi: [Function(anonymous)] }
+    //怎么有呢？
+    console.log(su.toString());
+    //Person.prototype 是一个对象
+    console.log(su.__proto__.__proto__);//原型对象上的原型   原型链
+  </script>
+</body>
+</html>

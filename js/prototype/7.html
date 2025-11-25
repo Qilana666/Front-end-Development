@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    var obj=new Object();
+    function Animal(){
+
+    }
+    Animal.prototype=obj;
+    // Animal.prototype.species='动物'
+    Animal.prototype=obj;
+    function Person(){
+
+    }
+    Person.prototype=new Animal();//Person 的原型对象是Animal
+
+    var su=new Person();
+    console.log(su.species,su.__proto__,su.toString());
+    
+  </script>
+</body>
+</html>
