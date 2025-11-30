@@ -13,11 +13,22 @@
 
 ## 模块化
 <!-- modelscope 预装了 -->
-<!-- OpenAI sdk 是绝大多数大模型的api 接口事实标准 -->
+<!-- OpenAI sdk 是绝大多数大模型的api 接口事实标准 只用把base url改了 -->
 <!-- es6反过来 -->
 <!-- 模块化的好处是 分离关注点（一个模块一个文件干一件事），提高代码的可维护性和可扩展性 -->
-- from openai import OpenAI
+- from openai import OpenAI  OpenAI大写，是个类
 
 ## chat.completions
-    - role
-        - system 多轮聊天中，只在最初设置一次
+- 多轮对话
+    - 更好的上下文
+- role
+    - system 多轮聊天中，只在最初设置一次，例如身份和约定
+    - user 用户输入
+    - assistan
+
+## 大模型的训练
+Deepseek 基于**预训练数据**中的文本模型进行推理和回答的
+- 新闻，股市等实时性信息是不知道的
+
+## 大模型调用工具
+- 教LLM去使用上网调用接口的工具？
