@@ -1,0 +1,24 @@
+<script>
+  //解决了代码重复的问题
+  //封装了实例化的过程
+  function Cat(name, color) {
+    // this 指向实例对象， 由运行时决定
+    // 以前都是在编译阶段解决一些问题吧。什么执行上下文啊，什么我们的作用域，词法作用域，作用域链，还有闭包，
+    // 来了一个大反派，
+    // this 哈哈，它是在呢我们的这个啊，运行的时候决定的
+    console.log(this);  // 空对象
+    // 我们可以通过 this 来添加属性
+    this.name = name;
+    this.color = color;
+  }
+  //普通函数调用的时候，this 指向window
+  Cat('罗小黑', '黑色');  //函数运行
+
+  //new object()  完全是个空对象 {}
+  const cat1 = new Cat('加菲猫', '黄色'); // this 指向实例对象 空对象
+  console.log(cat1);
+  const cat2 = new Cat('罗小黑', '黑色');
+  console.log(cat1.constructor === cat2.constructor);
+  // instanceof 运算符用来检测构造函数的 prototype 属性是否出现在某个实例对象的原型链上。
+  console.log(cat1 instanceof Cat);
+</script>

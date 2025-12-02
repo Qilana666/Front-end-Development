@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    function Cat(name, color) {
+      this.name = name;
+      this.color = color;
+      //个类啊，除了属性之外，还有方法。
+      // 所以我们这样加也是可以的。也这样加也可以，在这个对象上，
+      // 实力上有了这个方法，也有了这个属性。但是啊，这个地方的话呢，有点浪费。
+      //可以用函数的原型对象
+      // this.type = '猫科动物'
+      // this.eat = function () { alert('喜欢jerry') }
+    }
+    Cat.prototype.type = '猫科动物'
+    Cat.prototype.eat = function () {
+      console.log('喜欢jerry');
+    }
+    var cat1 = new Cat('tom', '粉色');
+    console.log(cat1.type, cat2.type);
+    cat1.type = '铲屎官的主人'
+    console.log(cat1.type, cat2.type);
+    var cat1 = new Cat('加菲猫', '黄色')
+    var cat2 = new Cat('罗小黑', '黑色')
+  </script>
+</body>
+
+</html>
