@@ -1,15 +1,16 @@
 {
   "name": "backend",
   "version": "1.0.0",
-  "description": "",
+  "description": "初始化项目配置，并安装一个能快速搭建模拟后端 API 的工具，方便快速开发和测试。\r 1.npm init -y\r 2.pnpm i json-server",
   "main": "index.js",
   "scripts": {
-    "dev":"json-server --watch users.json --port 3002"
+    "dev": "json-server --watch users.json --port 3001"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "json-server": "1.0.0-beta.3"
-  }
+  },
+  "devDependencies": {}
 }

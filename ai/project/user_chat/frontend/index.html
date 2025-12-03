@@ -7,16 +7,28 @@
   <title>Users Chatbot</title>
   <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
 </head>
+<!-- 浏览器的渲染流程
+  1. 解析HTML文档，构建DOM树
+  2. 解析CSS文档，构建CSSOM树
+  3. 将DOM树和CSSOM树合并，构建渲染树
+  4. 根据渲染树，计算每个元素的位置和大小
+  5. 将元素绘制到屏幕上
+-->
+<!-- 只有html文件，没有css文件，没有js文件，只有一个空的body标签。也会显示一个空的页面。 -->
 
 <body>
   <!-- PC端页面框架 
-    bootstrap Layout 行列 
-    列的布局， 总共12个单位， 
+    bootstrap是什么？ 是一个前端框架，用于快速搭建响应式的网页。
+    提供Layout行列式布局吗？  是，bootstrap 提供了一套基于网格系统的布局方案，称为行列式布局（Grid System）。
+    复杂的是列的布局， 总共12个单位， 
   col-md-6 一半
-
   -->
+
+  <!-- 以下是用户列表 -->
   <div class="container">
-    <div class="row col-md-6 col-md-offset-3">
+    <!-- 这行代码的作用是将列居中显示，占用6个单位，偏移3个单位 -->
+    <div class="row col-md-6 col-md-offset-3"><!-- 这行代码的作用是将列居中显示，占用6个单位，偏移3个单位  -->
+      <!-- 偏移三个单位是什么意思？  偏移三个单位是指将列向右移动3个单位，使得列的中心对齐到父容器的中心。 -->
       <table class="table table-striped" id="user_table">
         <!-- 表头 -->
         <thead>
@@ -30,64 +42,82 @@
 
         </tbody>
       </table>
+
+      <!-- 以下是提交问题的表单 -->
     </div>
     <div class="row">
       <form name="aiForm">
         <div class="form-group">
-          <label for="questionInput">请输入问题：</label>
+          <label for="questionInput">请输入问题：</label> <!-- 这行代码的作用是为输入框添加一个标签，用于描述输入框的作用 -->
           <input type="text" class="form-control" id="questionInput" name="question" required placeholder="请输入问题">
+          <!-- required是什么意思？  required 是一个属性，用于指定输入框必须填写内容，否则无法提交表单。 -->
         </div>
-        <div class="form-group">
+        <div class="form-group"> <!-- 这行代码的作用是将提交按钮包裹在一个类名为form-group的div中，用于样式化提交按钮 -->
           <button type="submit" class="btn btn-primary">提交</button>
+          <!-- 为什么每行代码都要加个类？ -->
+          <!-- 是因为bootstrap框架要求每个表单元素都要包裹在一个类名为form-group的div中，用于样式化表单元素。 -->
         </div>
       </form>
     </div>
     <div class="row" id="message"></div>
   </div>
   <script>
-    const oForm = document.forms["aiForm"];// 获取页面中的表单元素
-    const oBody = document.querySelector('#user_table ');
-    const oBtn = document.querySelector(".btn");// 获取页面中的提交按钮元素
-    let users;
+    const oForm = document.forms["aiForm"]; // oForm 是一个对象，用于表示表单元素。
+    //展示数据
+    const oBody = document.querySelector('#user_table tbody')
+    // 为什么id选择器后面要加空格？  是因为id选择器是唯一的，而tbody是一个类名，可能会有多个元素。
+    // oBody是一个元素，用于表示表格的tbody部分。
+    // 我们可以使用oBody来添加、删除或修改表格中的行。
+    const oBtn = document.querySelector(".btn");
+    let users; //
 
-    oForm.addEventListener("submit", (event) => {
-      event.preventDefault();
-      const question = oForm["question"].value;
-      // console.log(question);
+    oForm.addEventListener('submit', (e) => { // e 是事件对象， 用于表示事件的相关信息。
+      e.preventDefault() // 阻止表单默认提交行为
+      const question = oForm.question.value // 获取用户输入的问题
+      // console.log(question) // 打印到控制台
+
       // llm api 请求
       if (!question) {
         alert("请输入问题");
-        return;
+        return; //return的是什么？  是一个关键字，用于结束函数的执行。
       }
       oBtn.disabled = true;
-      console.log(`http://localhost:1314/?question=${question}&data=${JSON.stringify(users)}`);
+      // console.log(`http://localhost:443/?question=${encodeURIComponent(question)}&data=${encodeURIComponent(JSON.stringify(users))}`);
       fetch(
-        `http://localhost:1314/?question=${question}&data=${JSON.stringify(users)}`
+        `http://localhost:443/?question=${encodeURIComponent(question)}&data=${encodeURIComponent(JSON.stringify(users))}`
       ).then(res => res.json())
         .then(data => {
           console.log(data);
           oBtn.disabled = false;
           document.getElementById('message').innerHTML = data.result;
         })
+        .catch(err => {
+          oBtn.disabled = false;
+          document.getElementById('message').innerHTML = `请求失败: ${err}`;
+        })
     })
 
     // 前(用户哪里，全球各地)后（机房）端通信
     // js fetch 主动的向后端发起请求
-    fetch('http://localhost:3001/users')
+    fetch('http://localhost:3001/users')// 向后端发起请求，获取用户列表
+      // 固定写法
       // 数据到达后， then 接着做
       // res 二进制数据， 转换为 json 格式
-      .then(res => res.json())
+      .then(res => res.json()) // 数据到达前端后， 转换为 json 格式
       .then(data => {
-        // console.log(data);
-        users = data;
-        // console.log(users, '////');
-        oBody.innerHTML = data.map(user => `
+        // console.log(data) // 数据到达后， 打印到控制台
+        users = data; // 数据到达后， 赋值给 users 变量
+        console.log(users, '////');
+        // 遍历用户列表， 生成表格的行 将每个用户的信息转换为页面中表格的行
+        // 遍历用户列表， 生成表格的行  
+        // map返回的是什么？ 一个新的数组，数组中的每个元素都是表格的行
+        oBody.innerHTML = data.map(user => `  
         <tr>
           <td>${user.id}</td>
           <td>${user.username}</td>
           <td>${user.hometown}</td>
         </tr>
-      `).join("")
+        `).join('') // 数组转换为字符串， 每个元素之间用空字符串连接
       })
   </script>
 </body>

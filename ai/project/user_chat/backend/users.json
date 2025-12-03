@@ -1,24 +1,24 @@
 {
-  "users":[
+  "users": [
     {
-      "id":1,
-      "username":"王先生",
-      "hometown":"永丰"
-    },
-     {
-      "id":2,
-      "username":"杜女士",
-      "hometown":"抚州"
-    },
-     {
-      "id":3,
-      "username":"王丽人",
-      "hometown":"进贤"
+      "id": 1,
+      "username": "王先生",
+      "hometown": "永丰"
     },
     {
-      "id":4,
-      "username":"张佳人",
-      "hometown":"进贤"
+      "id": 2,
+      "username": "杜女士",
+      "hometown": "抚州"
+    },
+    {
+      "id": 3,
+      "username": "王丽人",
+      "hometown": "进贤"
+    },
+    {
+      "id": 4,
+      "username": "张佳人",
+      "hometown": "进贤"
     }
   ]
 }
