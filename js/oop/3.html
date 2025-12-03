@@ -24,11 +24,17 @@
       console.log('喜欢jerry');
     }
     var cat1 = new Cat('tom', '粉色');
+    var cat2 = new Cat('罗小黑', '黑色');
     console.log(cat1.type, cat2.type);
     cat1.type = '铲屎官的主人'
     console.log(cat1.type, cat2.type);
-    var cat1 = new Cat('加菲猫', '黄色')
-    var cat2 = new Cat('罗小黑', '黑色')
+
+    console.log('name' in cat1)
+    console.log('type' in cat1)
+    //for key in obj  遍历对象的属性和方法，包括实例上的属性和方法，原型上的属性和方法
+    for (var prop in cat1) { // 遍历实例上的属性和方法，原型上的属性和方法
+      console.log(prop, cat1[prop])// 实例上的属性和方法，原型上的属性和方法
+    }
   </script>
 </body>
 
