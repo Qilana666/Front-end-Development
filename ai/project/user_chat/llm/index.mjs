@@ -15,7 +15,9 @@ console.log(process.env.OPENAI_API_KEY, '////'); // 打印 aigc 服务的 apiKey
 const client = new OpenAI({ //client 是 OpenAI 类的一个实例，用于调用 aigc 服务。
   apiKey: process.env.OPENAI_API_KEY,
   baseURL: 'https://api.302.ai/v1/chat/completions'
+  // baseURL: 'https://api.302.ai/v1'
 })
+
 // aigc
 const getCompletion = async (prompt, model = 'gpt-3.5-turbo') => { // 调用 aigc 服务
   //为什么用async？因为调用 aigc 服务是一个异步操作，需要等待服务返回结果。

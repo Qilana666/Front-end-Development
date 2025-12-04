@@ -16,7 +16,9 @@
     - users.json .sql 都可以作为数据文件来处理  .json和sql
       格式
     - package.json "scripts" 是node 后端脚本
-      npm run dev
+      npm run dev 启动后端服务
       json-server --watch users.json --port 3001
   - llm
+    - 提供大模型服务
+    - 要运行node main.mjs开启llm端
   - 要实现项目的正常交互，前端后端，LLm 服务都需要启动
