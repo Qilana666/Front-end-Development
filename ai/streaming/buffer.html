@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HTML5 Buffer</title>
+</head>
+
+<body>
+  <h1>Buffer</h1>
+  <!-- <p>html5 buffer 是一种用于存储数据的缓冲区，它可以在网络传输中使用，也可以在本地存储中使用。</p> -->
+  <div id="output"></div>
+  <script>
+    // js里面如何操控二进制？数组缓存？
+    //html5 编码对象 可以将字符串转换为二进制数组 为什么是转换为数组？
+    //因为数组是一种有序的集合，每个元素都有一个唯一的索引，我们可以通过索引来访问和操作数组中的元素。
+    //而二进制数组是一种特殊的数组，它的每个元素都是一个二进制数（0或1），我们可以通过数组索引来访问和操作二进制数组中的元素。
+
+    // encoder 可以将字符串转换为二进制数组
+    // decoder 可以将二进制数组转换为字符串
+    //二进制单位？
+    //字节（Byte）是计算机中最小的存储单位，它通常由8个二进制位（bit）组成。
+    //每个字节可以表示256个不同的值，范围从0到255。
+    //在计算机中，字节通常用于表示字符、整数、浮点数等数据类型。
+    const encoder = new TextEncoder();
+    console.log(encoder);  // TextEncoder {encoding: 'utf-8'}
+    const myBuffer = encoder.encode('你好 HTML5');
+    console.log(myBuffer);  // Uint8Array(12) [228, 189, 160, 229, 165, 189, 32, 72, 84, 77, 76, 53]
+    //buffer采用16进制表示，每个字节占用2个字符
+    //为什么上面打印的是12个字符？
+    //因为utf-8编码中，每个中文字符占用3个字节，每个英文字符占用1个字节
+    //所以'你好 HTML5'占用12个字节
+
+    // 数组缓存12字节
+    // 创建一个缓冲区，大小为12字节
+    const buffer = new ArrayBuffer(12);
+    console.log(buffer);  // ArrayBuffer(12) {}
+
+    // 创建一个视图，将缓冲区转换为8位无符号整数数组
+    // 视图可以理解为缓冲区的一个窗口，通过视图可以访问和操作缓冲区中的数据
+    const view = new Uint8Array(buffer);
+    // Uint8Array 是一种 8 位无符号整数数组，每个元素占用 1 个字节
+    // 我们可以通过视图来访问和操作缓冲区中的数据
+    // 这里将 myBuffer 中的数据复制到视图中
+    view.set(myBuffer);
+    console.log(view);  // Uint8Array(12) [228, 189, 160, 229, 165, 189, 32, 72, 84, 77, 76, 53]
+    // console.log(view);  // Uint8Array(12) [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    for (let i = 0; i < myBuffer.length; i++) {
+      // console.log(myBuffer[i]);
+      view[i] = myBuffer[i]; // 将 myBuffer 中的数据复制到视图中
+    }
+    const decoder = new TextDecoder('utf-8'); // 可以指定编码格式，默认是 utf-8
+    const originalText = decoder.decode(buffer); // 将缓冲区中的数据转换为字符串
+    console.log(originalText);  // 你好 HTML5
+    const outputDiv = document.getElementById('output');
+    outputDiv.innerHTML = `
+      完整数据:[${view}]<br>
+      第一个字节：${view[0]}<br>
+      缓冲区的字节长度：${buffer.byteLength}<br>
+      原来的文本：${originalText}
+    `
+    // outputDiv.innerHTML 可以将字符串插入到指定的元素中
+    // 这里将字符串插入到 id 为 output 的元素中
+    // 可以在浏览器中查看效果
+    // 可以在控制台中查看效果
+    // 可以在网络中查看效果
+    // 可以在本地存储中查看效果
+    // 可以在会话存储中查看效果
+    // 可以在本地数据库中查看效果
+    // 可以在会话数据库中查看效果
+
+
+
+  </script>
+</body>
+
+</html>
