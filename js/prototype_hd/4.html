@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    function Animal(name, age) {
+      this.name = name;
+      this.age = age;
+    }
+    Animal.prototype.species = '动物';
+    function Cat(name, age, color) {
+      //{} 空对象 <- this
+      // 构造函数式继承
+      // 手动指定
+      // Animal.call(this, name, age);
+      Animal.apply(this, [name, age]); // 数组传递
+      console.log(this, '////');
+      this.color = color;
+    }
+    function extend(Parent, Child) {
+      var F = function () { }; // 函数表达式 有开销但不大， 中介
+      F.prototype = Parent.prototype;
+      Child.prototype = new F(); // 实例的修改，不会影响原型对象
+      // (new F()).constructor = Child;
+      Child.prototype.constructor = Child;
+    }
+    extend(Animal, Cat);
+    Cat.prototype.eat = function () {
+      console.log('eat jerry');
+    }
+    const cat = new Cat('加菲猫', 2, '黄色');
+    console.log(cat.species);
+    cat.eat();
+  </script>
+</body>
+
+</html>

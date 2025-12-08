@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>实例和原型对象没有血缘关系</title>
+</head>
+
+<body>
+  <script>
+    //改变实例不改变原型对象
+    function Cat() {
+
+    }
+    Cat.prototype.species = '猫科动物';
+    // js 动态语言 可以在运行时给对象添加属性
+    const cat = new Cat();
+    cat.species = 'hello';
+    console.log(cat, Cat.prototype.species);
+  </script>
+</body>
+
+</html>

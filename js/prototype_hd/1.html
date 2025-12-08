@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>继承</title>
+</head>
+
+<body>
+  <script>
+    //父类
+    function Animal(name, age) {
+      this.name = name;
+      this.age = age;
+    }
+    Animal.prototype.species = '动物';  //节省内存空间
+    //prototype这样写，是为了节省内存空间，避免每个实例都有一个species属性
+    function Cat(color, name, age) {
+      //{}空对象<- this
+      //构造函数式继承
+      //手动指定 
+      // Animal.call(this, name, age); //call()里面的参数分别是什么？  第一个参数是this，后面的参数是父类的参数  //  调用父类的构造函数，继承父类的属性
+      Animal.apply(this, [name, age]); //第一个参数是this，后面的参数是父类的参数(数组传递)
+      this.color = color;
+      console.log(this, '////');
+    }
+    Cat.prototype = Animal.prototype; //直接继承prototype对象，避免了创建新的实例对象  有什么问题？  子类的原型对象指向了父类的prototype对象，导致子类的实例对象可以访问到父类的属性
+    // Cat.prototype = new Animal(); //prototype模式 原型式继承  
+    Cat.prototype.constructor = Cat; //修复constructor指向问题
+    const cat = new Cat('加菲猫', 2, '黄色');
+    console.log(cat.constructor, cat.species); //指向的是Animal构造函数，而不是Cat构造函数
+    // 修复了constructor指向问题，但是 species 指向了父类的prototype对象，导致子类的实例对象可以访问到父类的属性
+    console.log(Animal.prototype.constructor);
+  </script>
+</body>
+
+</html>
