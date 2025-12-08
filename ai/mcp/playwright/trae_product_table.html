@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TRAE 产品信息抓取结果</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #34495e;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            border-left: 4px solid #3498db;
+            padding-left: 15px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        th {
+            background-color: #3498db;
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: bold;
+        }
+        td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #ddd;
+            vertical-align: top;
+        }
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        tr:hover {
+            background-color: #e8f4f8;
+        }
+        .product-name {
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        .price {
+            color: #e74c3c;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+        .features {
+            line-height: 1.6;
+        }
+        .advantages {
+            line-height: 1.5;
+        }
+        .section {
+            margin: 30px 0;
+        }
+        .highlight {
+            background-color: #fff3cd;
+            padding: 10px;
+            border-radius: 5px;
+            border-left: 4px solid #ffc107;
+        }
+        ul {
+            padding-left: 20px;
+        }
+        li {
+            margin: 5px 0;
+        }
+        .footer {
+            margin-top: 40px;
+            text-align: center;
+            color: #7f8c8d;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>TRAE 产品信息抓取结果</h1>
+        
+        <div class="section">
+            <h2>📊 产品价格对比表</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>产品版本</th>
+                        <th>价格</th>
+                        <th>主要包含内容</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="product-name">TRAE Free</td>
+                        <td class="price">$0/月</td>
+                        <td class="features">
+                            • 10个快速请求 + 50个慢速请求（高级模型）/月<br>
+                            • 1000个请求（高级模型）/月<br>
+                            • 5000次自动补全/月<br>
+                            • IDE模式支持<br>
+                            • SOLO模式有限制<br>
+                            • 新功能访问限制
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="product-name">TRAE Pro</td>
+                        <td class="price">$3/月（首月折扣）<br>$10/月（第二个月起）</td>
+                        <td class="features">
+                            • 600个快速请求 + 无限慢速请求（高级模型）/月<br>
+                            • 无限请求（高级模型）<br>
+                            • 无限自动补全<br>
+                            • IDE模式完全支持<br>
+                            • SOLO模式完全支持<br>
+                            • 优先访问新功能
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="section">
+            <h2>🚀 核心产品线</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>产品</th>
+                        <th>定位</th>
+                        <th>核心功能</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="product-name">TRAE SOLO</td>
+                        <td>响应式编码代理</td>
+                        <td class="features">
+                            • 全速运行的自主编码<br>
+                            • 端到端执行<br>
+                            • 实时上下文适应<br>
+                            • 多代理协作<br>
+                            • 语音输入支持
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="product-name">TRAE IDE</td>
+                        <td>AI原生IDE</td>
+                        <td class="features">
+                            • 深度上下文理解<br>
+                            • 对话式交互<br>
+                            • 多代理协作<br>
+                            • 智能代码补全<br>
+                            • CUE预测性编辑
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="product-name">TRAE Plugin</td>
+                        <td>嵌入式AI编码助手</td>
+                        <td class="features">
+                            • 集成到现有开发工具<br>
+                            • AI副驾驶功能<br>
+                            • 实时代码建议
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="section">
+            <h2>⚡ 主要技术优势</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>优势类别</th>
+                        <th>具体特点</th>
+                        <th>详细说明</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="product-name">智能化开发</td>
+                        <td>从想法到发布</td>
+                        <td class="advantages">AI集成到整个开发生命周期，支持需求定义到部署的完整流程</td>
+                    </tr>
+                    <tr>
+                        <td class="product-name">自主开发</td>
+                        <td>SOLO自主发货</td>
+                        <td class="advantages">真正的响应式编码代理，适应用户想法、上下文和工作流程</td>
+                    </tr>
+                    <tr>
+                        <td class="product-name">无缝切换</td>
+                        <td>IDE和SOLO模式</td>
+                        <td class="advantages">在传统编码工作流和完全自主编码代理之间灵活切换</td>
+                    </tr>
+                    <tr>
+                        <td class="product-name">多代理协作</td>
+                        <td>专业代理团队</td>
+                        <td class="advantages">内置专业代理，支持自定义代理，可作为子代理协调复杂任务</td>
+                    </tr>
+                    <tr>
+                        <td class="product-name">智能集成</td>
+                        <td>工具集成</td>
+                        <td class="advantages">通过MCP协议智能访问外部资源，浏览器开发工具集成</td>
+                    </tr>
+                    <tr>
+                        <td class="product-name">上下文理解</td>
+                        <td>深度理解</td>
+                        <td class="advantages">深度理解代码库、外部信息，支持自定义规则精确调整AI行为</td>
+                    </tr>
+                    <tr>
+                        <td class="product-name">预测编辑</td>
+                        <td>CUE功能</td>
+                        <td class="advantages">预测用户下一步编辑，一键跳转或批量应用智能建议</td>
+                    </tr>
+                    <tr>
+                        <td class="product-name">实时适应</td>
+                        <td>动态上下文</td>
+                        <td class="advantages">统一智能管理分散的上下文，实时响应用户操作</td>
+                    </tr>
+                    <tr>
+                        <td class="product-name">并行开发</td>
+                        <td>多任务并行</td>
+                        <td class="advantages">同时运行多个代理处理不同任务，每个代理有独立模型和上下文</td>
+                    </tr>
+                    <tr>
+                        <td class="product-name">语音交互</td>
+                        <td>语音输入</td>
+                        <td class="advantages">支持语音输入交互，AI输出不限于代码，提供可视化直观反馈</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="section">
+            <h2>🎯 目标用户群体</h2>
+            <div class="highlight">
+                <ul>
+                    <li><strong>开发者</strong>: 寻求提升编码效率的程序员</li>
+                    <li><strong>团队</strong>: 需要AI辅助协作的软件开发团队</li>
+                    <li><strong>企业</strong>: 希望集成AI到开发流程的组织</li>
+                    <li><strong>个人项目</strong>: 从想法到产品的独立开发者</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🏆 竞争优势</h2>
+            <div class="highlight">
+                <ol>
+                    <li><strong>设计精美</strong>: 被用户称赞为"最美丽的代码编辑器"</li>
+                    <li><strong>功能强大</strong>: 深度思考和精确执行的AI能力</li>
+                    <li><strong>稳定性</strong>: 用户反馈产品稳定且响应迅速</li>
+                    <li><strong>创新UI/UX</strong>: 精心设计的用户界面和体验</li>
+                    <li><strong>全栈支持</strong>: 覆盖前端、后端、部署的完整开发流程</li>
+                </ol>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>数据来源: https://www.trae.ai/</p>
+            <p>抓取时间: 2025年 | 使用Playwright MCP工具抓取</p>
+        </div>
+    </div>
+</body>
+</html>
