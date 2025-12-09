@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    //模拟new的功能
+    function objectFactory() {
+      // var obj = {};  //创建一个空对象
+      var obj = new Object(); // 
+      return obj;
+    }
+    function Person(name, age) {
+      this.name = name;
+      this.age = age;
+    }
+    Person.prototype.species = '人类';
+    Person.prototype.sayHi = function () {
+      console.log(`你好，我是${this.name}`);
+    }
+    let p = new Person('张三', 18);
+    let wby = objectFactory(Person, '王老板', 18); // 手动调用构造函数，模拟new的过程
+    console.log(p, wby); // 打印结果：Person { name: '张三', age: 18 } Person { name: '王老板', age: 18 }
+  </script>
+</body>
+
+</html>
