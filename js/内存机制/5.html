@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    function foo() {
+      var a = "极客时间"
+      var b = a
+      var c = { name: "极客时间" }  //栈内存中是地址，堆内存中是对象 引用
+      var d = c
+    }
+    function bar() {
+      //...其他函数
+    }
+    foo()
+  </script>
+</body>
+
+</html>
