@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <h2 id="app"></h2>
+  <input type="text" id="todo-input">
+
+  <script>
+    // 先找到DOM元素, 命令式的, 机械的, 性能差的
+    // JS(V8引擎, 快) -> HTML(渲染引擎, 慢)， vue 底层也会做，代替我们做
+    // vue 让新手写的代码质量更好，容易入门，v-for, v-if, v-model, 事件绑定, 组件化, 数据驱动视图, {{}}, ref
+    // 响应式，数据驱动，让我们 focus 于数据业务
+    const app = document.getElementById('app');
+    const todoInput = document.getElementById('todo-input');
+    todoInput.addEventListener('change', function (event) {
+      const todo = event.target.value.trim();
+      if (!todo) {
+        console.log('请输入任务');
+        return;
+      }
+      app.innerHTML = todo;
+    })
+
+  </script>
+</body>
+
+</html>
