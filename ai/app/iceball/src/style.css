@@ -1,0 +1,76 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  align-items: start;
+  justify-content: start;
+  height: 100vh;
+  font-size: .85rem;
+}
+
+.preview {
+  max-width: 300px;
+  margin-bottom: 20px;
+}
+
+.settings {
+  display: flex;
+  flex-direction: row;
+  align-items: start;
+  justify-content: start;
+  margin-top: 1rem;
+}
+
+.selection {
+  width: 100%;
+  text-align: left;
+}
+
+.selection input {
+  width: 50px;
+}
+
+.input {
+  display: flex;
+  flex-direction: column;
+  min-width: 330px;
+}
+
+.file-input {
+  display: flex;
+  margin-bottom: 16px;
+}
+
+.output {
+  margin-top: 10px;
+  min-height: 300px;
+  width: 100%;
+  text-align: left;
+}
+
+button {
+  padding: 10px;
+  min-width: 200px;
+  margin-left: 6px;
+  border: solid 1px black;
+}
+
+.generate {
+  width: 100%;
+  margin-top: 16px;
+}
+
+.generated {
+  width: 400px;
+  height: 400px;
+  border: solid 1px black;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  /* 水平居中 */
+  align-items: center;
+  /* 垂直居中 */
+}
+
+.output img {
+  width: 100%;
+}
