@@ -16,3 +16,19 @@
     响应式数据 imgPreview img:src="imgPreview"
     filereader readasDataURL 方 onload 读完了 赋值给 imgPreview
     google 推出了 base64 编码， 可以将图片转化为二进制字符串
+
+## AI 应用业务开发
+
+- 数据状态业务 imgurl
+- coze 工作流调用 看官方文档
+- http post 
+  - http post 请求业务
+  - FormData 收集表单数据
+  - fetch 发送请求
+    headers Authorization Bearer ${patToken}
+    body formData.append('file');
+  - code  为0  成功  否则 ret.msg  错误消息
+  - data 响应数据  id
+
+
+

@@ -10,7 +10,7 @@
           required
         />
       </div>
-      <img :src="imgPreview" alt="" v-if="imgPreview"/> 
+      <img :src="imgPreview" alt="" v-if="imgPreview"/>
       <div class="settings">
         <div class="selection">
           <label >队服编号:</label>
@@ -22,34 +22,37 @@
             <option value="红">红</option>
             <option value="蓝">蓝</option>
             <option value="绿">绿</option>
-            <option value="粉">粉</option>
+            <option value="白">白</option>
+            <option value="黑">黑</option>
           </select>
         </div>
+      </div>
+      <div class="settings">
         <div class="selection">
           <label >位置：</label>
           <select v-model="position">
             <option value="0">守门员</option>
             <option value="1">前锋</option>
             <option value="2">后卫</option>
+          </select>
+        </div>
         <div class="selection">
-            <label>持杆：</label>
-            <select v-model="shooting_hand">
-              <option value="0">左手</option>
-              <option value="1">右手</option>
-            </select>
-          </div>
-          <div class="selection">
-            <label>风格：</label>
-            <select v-model="style">
-              <option value="写实">写实</option>
-              <option value="乐高">乐高</option>
-              <option value="国漫">国漫</option>
-              <option value="日漫">日漫</option>
-              <option value="油画">油画</option>
-              <option value="涂鸦">涂鸦</option>
-              <option value="素描">素描</option>
-            </select>
-          </div>
+          <label>持杆：</label>
+          <select v-model="shooting_hand">
+            <option value="0">左手</option>
+            <option value="1">右手</option>
+          </select>
+        </div>
+        <div class="selection">
+          <label>风格：</label>
+          <select v-model="style">
+            <option value="写实">写实</option>
+            <option value="乐高">乐高</option>
+            <option value="国漫">国漫</option>
+            <option value="日漫">日漫</option>
+            <option value="油画">油画</option>
+            <option value="涂鸦">涂鸦</option>
+            <option value="素描">素描</option>
           </select>
         </div>
       </div>
@@ -59,63 +62,127 @@
     </div>
     <div class="output">
       <div class="generated">
-        <img :src="imgurl" alt="" v-if="imgurl"/>
+        <img :src="imgUrl" alt="" v-if="imgUrl"/>
         <div v-if="status">{{ status }}</div>
       </div>
     </div>
   </div>
 </template>
-
 <script setup>
-  import { ref, onMounted } from 'vue'
-// script +setup 启用vue3 是vue3 最好的代码组织方式
-// composition api组合
-// 直接在script setup中定义函数
-// 用于标记一个DOM对象，如果要做dom编程就用ref
-// 未挂载前是null,uploadImage templte中的ref绑定的dom对象  
+import { ref, onMounted } from 'vue'
+// script + setup 是vue3 最好的代码组织方式
+// composition api 组合
+// 直接在script setup 中定义函数
+// 用于标记一个DOM 对象， 如果要做就用ref
+// 未挂载前null, uploadImage tempalte 中的ref 绑定的对象
+const patToken = import.meta.env.VITE_PAT_TOKEN;
+console.log(patToken, '////');
+const uploadUrl = `https://api.coze.cn/v1/files/upload`;
+const workflowUrl = `https://api.coze.cn/v1/workflow/run`;
+const workflow_id = `7584414841902907432`;
 const uniform_number = ref(10);
 const uniform_color = ref('红');
 const position = ref(0);
 const shooting_hand = ref(0);
 const style = ref('写实');
-// 聚焦于数据状态
-const status = ref('');   //空-> 上传中 -> 生成中-> 生成成功
-const imgurl = ref('');
-// 生成图片模块
-const generate = async() => { 
-  status.value = '图片上传中...';
-}
-//图片预览模块
-const uploadImage = ref(null);   //响应的是个dom对象
-const imgPreview = ref(''); //声明了响应式对象
+// 数据状态
+const status = ref('');// 空 -> 上传中 -> 生成中 -> 生成成功
+const imgUrl = ref(''); // 生成的图片url
 
-// null->dom 对象 变化
+// 生成图片模块
+const generate = async () => {
+  status.value = "图片上传中...";
+  const file_id = await uploadFile();
+  if(!file_id) return;
+  status.value = "图片上传成功,正在生成...";
+
+  // workflow 调用
+  const parameters = {
+    picture: JSON.stringify({
+      file_id, // 安全问题
+    }),
+    uniform_number: uniform_number.value,
+    uniform_color: uniform_color.value,
+    position: position.value,
+    shooting_hand: shooting_hand.value,
+    style: style.value,
+  }
+
+  const res = await fetch(workflowUrl,{
+    method: 'POST',
+    headers: {
+      'Authorization': `Bearer ${patToken}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      workflow_id,
+      parameters,
+    }),
+  });
+  const ret = await res.json();
+  if(ret.code !== 0) {
+    status.value = ret.msg;
+    return;
+  }
+
+  const data = JSON.parse(ret.data);
+  console.log(data);
+  status.value = '';
+  imgUrl.value = data.data;
+}
+
+// 上传文件到coze服务器
+const uploadFile = async () => {
+  // post请求体 http协议
+  const formdata = new FormData();  // 收集表单数据
+  const input = uploadImage.value;
+  if(!input.files || input.files.length <= 0) return;
+  formdata.append('file', input.files[0]);  // 请求体里加上了文件
+  // coze发送 http 请求 上传
+  const res = await fetch(uploadUrl, {
+    method: 'POST',
+    headers: {
+      // 请求头 令牌
+      // 授权令牌 
+      'Authorization': `Bearer ${patToken}`
+    },
+    body: formdata
+  })
+  const ret = await res.json();
+  console.log(ret);
+  if(ret.code !== 0) { // 如果出错了
+    status.value = ret.msg; // msg 错误消息
+    return
+  }
+  return ret.data.id;
+}
+
+// 图片预览模块
+const uploadImage = ref(null);
+const imgPreview = ref(''); // 申明了响应式对象
+// null -> dom 对象 变化 
+// 挂载了 
 onMounted(() => {
   console.log(uploadImage.value);
 })
-
-// const updateImageData = (e) => {
-//   console.log(e)
-// }
 const updateImageData = () => {
   // html5 文件对象
-  console.log(uploadImage.value.files);
+  // console.log(uploadImage.value.files);
   const input = uploadImage.value;
-  if(!input.files||input.files.length===0){  //不是规定的文件类型 或者 没有选择文件
+  if (!input.files || input.files.length === 0) {
     return;
   }
-  const file = input.files[0];  //文件对象  html5 新特性
+  const file = input.files[0]; // 文件对象 html5 新特性
   console.log(file);
-  //FileReader 文件阅读对象
+  // FileReader 文件阅读对象
   const reader = new FileReader();
-  reader.readAsDataURL(file);  //在读的时候返回一个临时的url   异步的
-  reader.onload = (e) => {  //异步的任务，事件监听  读完了之后
-    // console.log(e.target.result); //image/png;base64   base64 是图片的特殊url
-    imgPreview.value = e.target.result; 
+  reader.readAsDataURL(file); // url 异步的 
+  reader.onload = (e) => { // 读完了
+    // console.log(e.target.result); // base64 编码的字符串
+    imgPreview.value = e.target.result;
   }
 }
 </script>
-
 <style  scoped>
 .container {
     display: flex;
