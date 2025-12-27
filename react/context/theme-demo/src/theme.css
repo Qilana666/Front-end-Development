@@ -1,0 +1,31 @@
+/* theme.css */
+
+/* 伪类选择器 */
+:root {  
+  /* 全局变量 css 也是编程语音 */
+  --bg-color: #ffffff;
+  --text-color: #222;
+  --primary-color: #1677ff;
+}
+
+/* []属性选择器 */
+[data-theme='dark'] {
+  --bg-color: #141414;
+  --text-color: #f5f5f5;
+  --primary-color: #4e8cff;
+}
+
+body {
+  margin: 0;
+  background-color: var(--bg-color); /*使用变量bg-color*/
+  color: var(--text-color);
+  transition: all 0.3s;
+}
+
+.button {
+  padding: 8px 16px;
+  background: var(--primary-color);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
