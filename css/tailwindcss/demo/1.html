@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    /* css rule  
+    css selector 名字
+    样式
+  */
+    /* .primary-btn {
+    padding: 8px 16px;
+    background: blue;
+    color: white;
+    border-radius: 6px;
+  }
+  .default-btn {
+    padding: 8px 16px;
+    background: #ccc;
+    color: #000;
+    border-radius: 6px;
+  } */
+
+    /* 面向对象css 提高效率。组合起来 */
+    .btn {
+      padding: 8px 16px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: blue;
+      color: white;
+    }
+
+    .btn-default {
+      background: #ccc;
+      color: #000;
+    }
+  </style>
+</head>
+
+<body>
+  <button class="primary-btn">提交</button>
+  <button class="default-btn">默认</button>
+  <button class="btn btn-primary">提交</button>
+  <button class="btn btn-default">默认</button>
+</body>
+
+</html>

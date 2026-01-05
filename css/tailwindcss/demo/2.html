@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div class="container"></div>
+  <script>
+    const container = document.querySelector('.container');
+    const p1 = document.createElement('p');
+    p1.textContent = '111';
+    const p2 = document.createElement('p');
+    p2.textContent = '222';
+    // 性能优化而来 
+    const fragment = document.createDocumentFragment();
+    fragment.appendChild(p1);
+    fragment.appendChild(p2);
+    container.appendChild(fragment);
+  </script>
+</body>
+
+</html>
