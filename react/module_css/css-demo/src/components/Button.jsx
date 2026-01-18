@@ -6,9 +6,11 @@
 import styles from './Button.module.css'
 import './Button.module.css'
 console.log(styles)
-
+// 以组件为单位控制样式的可控性
 export default function Button() {
-  return (
-      <button className={styles.button}>My Button</button>
+  return (<>
+    <h1 className={styles.txt}>你好，世界！！！</h1>
+    <button className={styles.button}>My Button</button>
+  </>     
   )
 } 
