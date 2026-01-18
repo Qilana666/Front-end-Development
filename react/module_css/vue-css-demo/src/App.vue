@@ -4,27 +4,20 @@ import HelloWorld from './components/HelloWorld.vue'
 
 <template>
   <div>
-    <a href="https://vite.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
+    <h1 class="txt">Hello world in App</h1>
+    <h2 class="txt2">一点点</h2>
+    <HelloWorld/>
   </div>
-  <HelloWorld msg="Vite + Vue" />
+
 </template>
 
+<!-- 加上scoped 后，HelloWorld.vue 中的 txt 类名不会影响到 App.vue 中的 txt 类名 -->
+ <!-- 一个scope 对应一个id -->
 <style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
+.txt {
+  color: red;
 }
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
+.txt2{
+  color:pink;
 }
 </style>
