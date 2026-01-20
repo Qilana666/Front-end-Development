@@ -7,13 +7,16 @@ import {
   useNavigate,
   useLocation
 } from 'react-router-dom';
-import BackToTop from '@/components/BackToTop'
+import BackToTop from '@/components/BackToTop';
+import {useHomeStore} from '@/store/home'
+
 export const needsLoginPath = ['/mine', '/order', '/chat']
 
 function App() {
   const {isLogin} = useUserStore();
   const navigate = useNavigate();
-  const {pathname} = useLocation();
+  const { pathname } = useLocation();
+  
   
   useEffect(() => {
     if (!isLogin && needsLoginPath.includes(pathname)) {
@@ -22,7 +25,7 @@ function App() {
   }, [isLogin, navigate, pathname]);
   return (
     <>
-      <BackToTop />
+      <BackToTop/>
     </>
   )
 }
