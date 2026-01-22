@@ -3,15 +3,18 @@ import type { Post } from '@/types';
 
 export const fetchPosts = async (page:number = 1, 
   limit:number=10) => {
-    try {
-      const response = await axios.get('/posts', {
+  try {
+      console.log('/////')
+    const response = await axios.get('/api/posts', {
+      
         params: {
           page,
           limit
         }
-      })
+    })
+    console.log('/|||||||')
       console.log(response);
-      return response.data;
+      return response;
     } catch(err) {
 
     }

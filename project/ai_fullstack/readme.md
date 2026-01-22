@@ -132,3 +132,87 @@ pnpm i zustand
     - pagination 分页信息
 
     pnpm i axios
+
+## JWT 登录
+
+- http 无状态的
+  Cookie Authorization token 身份令牌
+- 颁发令牌 token
+- JWT (Json Web Token)
+  pnpm i json（用户身份对象）web(形式)token（令牌）
+  用户名+密码 {id:1,name:'admin'} json 加密成一个token
+  请求时，再传过来 服务端 decode 得到用户对象
+- sign 方法 服务器 用户对象， secret ，过期时间 给前端颁发token
+- decode 方法，解析请求头中的 authorization 字段，获取token，解析token，服务器得到用户对象
+
+### api 后端接口项目
+
+- nest new posts  
+  高度模块化、依赖注入特性的企业级开发框架
+  npm run start
+  npm run start:dev
+- 数据库
+
+### prisma ORM
+
+将数据库映射成对象
+Table -> 类
+row -> 示例
+props -> props
+psql/mysql sql 太专业了，prisma 翻译官
+后端 -> prisma -> sql
+User （service class） === User(table)
+create方法 === Insert
+findMany方法 === Select \* from user
+
+### ORM ObjectRelationMapping 对象关系映射
+
+### Prisma 的初始化流程
+
+- 建数据库
+- prisma 命令行 +@prisma/client（ORM）
+- pnpm i prisma@6.19.2
+- npx prisma init
+  - \c xue 连接数据库
+  - \
+
+### schema 文件
+
+数据库是最重要的，schema 就是数据库设计稿 设计文件保下来
+用model 模型类的概念，描述数据表
+@id primary key 主键
+@default(@increment()) 自增
+@db.Varchar(255)
+@unique
+
+- npx prisma migrate dev --name init_user
+- npx prisma migrate dev --name add_posts
+<!-- 打开 prisma studio 可视化查看数据库 -->
+- npx prisma studio
+
+### migrate 数据表的迁移
+
+- 方便
+- 留下日志
+
+### seeds
+
+安装 express 平台
+pnpm i @nestjs/platform-express
+
+### DTO Data Transfer Object
+
+从前端 => 后端 => 控制器 => service transfer 过程
+
+- pnpm i class-validator
+- pnpm i class-transformer
+- dot/post-query.dto.ts
+- dot/post-new.dto.ts
+- class-validator 验证器
+  将参数的校验 流程化 规范化
+- 全局配置一下
+
+### @prisma/client
+
+- 怎么给service 提供 client 代替db
+- npx prisma generate

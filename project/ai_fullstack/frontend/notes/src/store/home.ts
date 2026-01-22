@@ -27,7 +27,7 @@ export const useHomeStore = create<HomeState>((set) => ({
   }],
   posts:[],
   loadMore: async () => {
-    const { items } = await fetchPosts();
-    console.log(items);
+    // const { items } = await fetchPosts();
+    console.log(await fetchPosts());
   }
 }))

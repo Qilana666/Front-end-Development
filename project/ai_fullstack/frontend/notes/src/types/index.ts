@@ -17,7 +17,7 @@ export interface Post{
 }
 
 //dry 原则 don't repeat yourself
-export interface Credential{
+export interface Credentail{
   name: string;
   password: string;
 }

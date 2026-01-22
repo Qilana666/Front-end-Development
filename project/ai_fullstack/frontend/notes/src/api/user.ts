@@ -1,7 +1,6 @@
-import axios from 'axios'; 
-import type {Credential} from '@/types';
+import axios from './config';
+import type { Credentail } from '@/types';
 
-// export const doLogin = (data:{name:string,password:string}) => {
-export const doLogin = (data:Credential) => {
+export const doLogin = (data: Credentail) => {
   return axios.post('/auth/login', data);
 }
