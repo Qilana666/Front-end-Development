@@ -216,3 +216,19 @@ pnpm i @nestjs/platform-express
 
 - 怎么给service 提供 client 代替db
 - npx prisma generate
+
+### 图片懒加载
+
+- img src http 请求 并发
+  - 需要加载的图片 首页首屏
+    图片用占位图片（小），优先去加载html,css,首屏的显示速度优先
+  - 视图窗口（viewport）之外的 不需要加载
+    监听onscroll 事件 节流 滚动哪里 懒加载进入视窗的图片
+  - 首先实例化 IntersectionObserver
+    Observer 观察者（设计模式）模式
+    Intersection 与 viewport 的交叉
+    entries 所有被观察的元素
+    isIntersecting 是否出现
+    data-src 交给图片
+    observer.unobserve 取消观察
+    给所有的.lazy 加观察 observer.observe()

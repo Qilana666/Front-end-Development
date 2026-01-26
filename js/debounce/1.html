@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>防抖</title>
+</head>
+
+<body>
+  <div>
+    <input type="text" id="undebounce" />
+    <br>
+    <input type="text" id="debounce" />
+    <br>
+    <input type="text" id="throttle" />
+  </div>
+  <script>
+    function ajax(content) {
+      console.log('ajax request', content);
+    }
+    // 高阶函数 参数或返回值（闭包）是函数（函数就是对象） 
+    function debounce(fn, delay) {
+      var id; // 自由变量 
+      return function (args) {
+        if (id) clearTimeout(id);
+        var that = this;
+        id = setTimeout(function () {
+          fn.call(that, args)
+        }, delay);
+      }
+    }
+    // 节流 fn 执行的任务 
+    function throttle(fn, delay) {
+      let
+        last,
+        deferTimer;
+      return function () {
+        let that = this; // this 丢失
+        let _args = arguments // 类数组对象
+        let now = + new Date(); // 类型转换， 毫秒数
+        // 上次执行过 还没到执行时间
+        if (last && now < last + delay) {
+          clearTimeout(deferTimer);
+          deferTimer = setTimeout(function () {
+            last = now;
+            fn.apply(that, _args);
+          }, delay);
+        } else {
+          last = now;
+          fn.apply(that, _args);
+        }
+      }
+    }
+
+    const inputa = document.getElementById('undebounce');
+    const inputb = document.getElementById('debounce');
+    const inputc = document.getElementById('throttle');
+
+    let debounceAjax = debounce(ajax, 500);
+    let throttleAjax = throttle(ajax, 500);
+    inputc.addEventListener('keyup', function (e) {
+      throttleAjax(e.target.value)
+    })
+    // 频繁触发
+    inputa.addEventListener('keyup', function (e) {
+      ajax(e.target.value) // 蛮复杂
+    })
+    inputb.addEventListener('keyup', function (e) {
+      debounceAjax(e.target.value)
+    })
+  </script>
+</body>
+
+</html>
