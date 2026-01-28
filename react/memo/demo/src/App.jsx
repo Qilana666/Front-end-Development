@@ -12,8 +12,10 @@ import {
 //     </div>
 //   )
 // }
-// 高阶组件
+// 高阶组件 React.memo
 // 参数是一个组件，返回值是一个新的组件
+// 缓存一个组件
+//适用于渲染开销大、props变化不频繁的组件，可有效减少不必要的重渲染，提升应用性能
 const Child = memo(({count,handleClick}) => {  //解构
   console.log('child 重新渲染');
   return (
