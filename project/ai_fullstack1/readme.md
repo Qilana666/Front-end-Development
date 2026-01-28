@@ -45,13 +45,14 @@
 - 前端路由
   早期前端没有路由，路由由后端，前端是切图崽
   前后端分离， 前端有独立的（html5）路由，实现页面切换。
+  pnpm i react-router-dom
 - 两种形式
   - HashRouter #/ 丑一点 很温柔 兼容性很好 瞄点
   - BrowserRouter / 和后端路由一样，需要使用到html5 history API
     兼容不好，ie11 之前不兼容， 现在的浏览器几乎都支持
-- as Router 可读性
+- as Router 可读性 取别名
 - 性能， 快 页面组件的懒加载
-  / Home 延迟一下About 阻止加载
+  / Home 首页的时候 需要只加载Home 延迟一下About 阻止加载
   /About About
 
 ### 路由有多少种？
