@@ -85,6 +85,10 @@ JavaScript 超级 ， 强类型静态语言
 
 - 安装 ts
   npm install -g typescript
+- 检查版本
+  tsc -v
+- 浏览器要执行的是js的代码 要把ts 编译成js 代码
+  tsc 3.ts
 - ts 的优点
   - 静态类型
   - 边写边检查bug
@@ -101,7 +105,7 @@ JavaScript 超级 ， 强类型静态语言
 如果说国家需要有中央银行，那么前端项目就需要中央状态管理系统。zustand \redux
 
 - 组件 = UI+State
-- store 将状态存到store仓库中管理
+- store 将状态存到store仓库中管理 私有状态？
   全局共享
 - 基于hooks思想实现的
 
