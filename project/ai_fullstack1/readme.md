@@ -160,24 +160,25 @@ JavaScript 超级 ， 强类型静态语言
 
 ### ACID
 
+- 数据库事务的“四大铁律” 为了保证数据的准确和安全
 - 事务 transaction
   数据库操作的最小单位，
-  A Atomicity 原子性
+- A Atomicity 原子性
   要么都成功， 要么全部失败回滚。
   转账 扣A的100元，和增加B的100元。 转账事务
-- A 成功 type out 减少总金额 先 成功。回滚失败
-- B 成功 type in 增加总金额 后 失败， 回滚A的操作
+  A 成功 type out 减少总金额 先 成功。回滚失败
+  B 成功 type in 增加总金额 后 失败， 回滚A的操作
 
-C Consistency 一致性
-数据库从一个一致状态转换到另一个一致状态，
-转账事务中，A和B的总金额保持不变。
+- C Consistency 一致性
+  数据库从一个一致状态转换到另一个一致状态，
+  转账事务中，A和B的总金额保持不变。
 
-Isolation 隔离性
-并发执行的事务 相互独立， 互不干扰。
-两笔转账， A转B 100元， C 转B 200 元
+- Isolation 隔离性
+  并发执行的事务 相互独立， 互不干扰。
+  两笔转账， A转B 100元， C 转B 200 元
 
-D Durability 持久性
-事务一旦提交， 对数据库的改变是永久的， 不会因为系统故障而丢失。
+- D Durability 持久性
+  事务一旦提交， 对数据库的改变是永久的， 不会因为系统故障而丢失。
 
 ### psql
 
@@ -188,6 +189,8 @@ D Durability 持久性
   CREATE DATABASE xuebi WITH OWNER=postgres ENCODING='UTF-8';
 - 进入数据库
   \c xuebi
+- \dt 列出所有表
+- \d 表名 查看表结构
 
 ### prompt 建表
 
@@ -225,6 +228,8 @@ CREATE TABLE users (
   ('6', '张三', '$2b$10$CsO/ykedPpuxqUETBZTYm.F2U4TXDdo01rLmoRPwjKBv3pIL5pnWq');
 ```
 
+select * from users; *单个执行语句后别忘了加;\*
+
 你是一位psql 高级工程师， 需要建一个posts 表， 包含id, title, content,userId 三个字段。id 自增， 主键， title 不为空，不超过255个字符， content 长文本， usersId 是bigint 类型，是 users 表的外键，请给出建表sql
 
 CREATE TABLE posts (
@@ -248,7 +253,11 @@ nestjs 企业级开发，基于typescript ,采用模块化架构和依赖注入�
 旨在构建高效、可扩展切易于维护的企业级后端应用
 
 - npm i -g @nestjs/cli
+  nest -v 查看版本
 - 新建项目 nest new nest-test-demo
+  pnpm i dotenv
+- npm run start:dev 开发阶段启动项目
+  设置了端口号 1234 要重新启动nest
 
 ### nestjs 理解
 
