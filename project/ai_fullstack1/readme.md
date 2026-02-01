@@ -540,3 +540,132 @@ findMany === Select
 - 列表一定要做图片的懒加载
 - react-lazy-load 提供了 组件 ， 背后 IntersectionObserver
 - 包着原来要显示的图片 loading="lazy"
+
+### InfiniteScroll 组件
+
+- 通用组件
+  为列表带来分页无限加载能力
+- 抽象封装能力
+  可定制的列表作为children
+  在children 下面添加一个哨兵节点
+- 使用IntersectionObserver threshold 0.0
+- loadMore loading hasMore store
+- 联动启动
+
+### 首页优化
+
+- 反复切换 首页，其他页面 重复加载
+- 路由的切换， 单页应用 SPA Single Page Application
+  React + React-Router
+  快 不需要白屏 等待
+  / /detail/:id /login
+  服务器 后端路由 http请求 完整的html
+  前端负责路由， js 中拿出来组件（前端），进行替换
+- 首页太重要了， 用户频繁的在首页和其他页面切换（美团，天猫）
+  首页的不断卸载挂载， 重复渲染 不违和了
+
+### KeepAlive
+
+- home 不能卸载， keep alive
+- react-activation
+  cache 缓存 home , 界面和数据都保持
+  display:none 离开文档流
+  KeepAlive + ALiveScope
+
+### 登录功能
+
+- 注册
+  - password 单向加密
+    不能解密， 防程序员，黑客， 可以确保密码安全
+    bcrypt 单向哈希
+- 登录
+  cookie 之前的登录解决方案， 小饼干 http 自动带上cookie ,
+  cookie比localStorage 更小的本地存储， 存身份信息
+  JWT Authorization 字段 axios 请求拦截
+  轻量级，跨域 JSON（用户对象信息 不安全） Web Token(hash 令牌)
+  双向（加解密sigh/decode secret）
+  身份验证
+- Auth 鉴权模块
+  - @nestjs/jwt 需要安装的，但是是nestjs 本身提供的jwt 身份验证模块
+    jwt 协议
+  - JWTService sign
+  - JWTModule Auth模块里面import 它，方便注入依赖
+
+### JWT 双token 机制
+
+- mockjs, 使用了jsonwebtoken 单token sign/decoded
+- 单token 容易被中间人截获，不安全。双token机制
+- access_token(短， 分钟为单位) 和refresh_token（长， 天为单位）
+  一样的具有token 验证的能力（JWTService.signAsync）
+  axios 请求拦截中 access_token , 会比较快的过期
+  会拿出refresh_token 后端可以识别用户身份 再次生成一对token
+- 新的token 对覆盖旧的， 继续使用access_token就可以了。
+- refresh_token 7天， 需要重新登录
+- Promise.all 面试官问
+  举个例子 nest.js posts 列表查询， count, 和 list Promise.all 并发查询。
+  还有nest.js 双token 的并发生成 token 生成是需要开销性能和时间
+
+### 错误异常模块
+
+- 后端，错误处理是核心模块。
+  4XX, 400 BadRequest 401 UnAuthorizated
+  5XX 服务器端错误
+- try {} catch() { .... }
+  catch 错误可以被善待
+- BadRequestException
+  nestjs 准备了各种异常
+  各种异常处理类，解决各总问题
+  - return
+  - 400|401|403|500.... statusCode , message
+
+## 鉴权处理
+
+- 新增文章 点赞等 需要权限的操作， 需要先登录。
+- access_token, refresh_token
+  api 请求由axios 自动带上access_token , Authorization
+- backend posts.controller createPost 方法
+  createPost 需要收到鉴权的保护？ nestjs 提供了 guard 的概念  
+  req Authorization access_token ?
+  拿到 user ? @nestjs/jwt verify?
+
+### nestjs useGard
+
+UseGards 是一个装饰器，用于在控制器或路由处理方法上应用守卫（Guard）
+会在路由处理方法前，先执行Guard函数，鉴权
+如果鉴权失败，401， 直接退出
+如果成功 用jwt verify 出来的对象帮我们添加到req 对象上
+路由处理方法里面就可以使用user 信息
+
+- AuthGuard('jwt') 由@nestjs/passport 直接提供
+- Unknown authentication strategy "jwt"
+  jwt 鉴权策略在那？
+  会去查找
+- jwt 双token 流程
+  - 双token 生成， @nestjs/jwt
+  - 鉴权 @nests/guard useGuard
+  - 刷新 ？ refresh  
+    post /posts 新增 token
+    useGuard 返回 401 ?
+
+### refresh token
+
+- axios 响应拦截，有成功处理函数， 如果服务器端抛出异常， 执行失败处理函数。
+  找到了refresh 入口
+
+### chatbot
+
+- 流式输出
+- llm 提的问题 input
+  llm 函数(参数1...) 百亿
+  llm 返回 output
+  智能
+  token 生成按token 来生成
+  token生成token 神经网络系统 AIGC tokens 的循环生成
+  流式？
+
+- 前端用户体验
+  响应更快，打字机一样效果，像水流逐字输出。
+
+- http 请求
+  Connection: Keep Alive
+  事件监听 SSE Server Send Event
