@@ -12,7 +12,8 @@ const main = () => {
   // 并行呢？
   // await sleep(3);
   // await sleep(2);
-  return Promise.race([sleep(3), sleep(2), sleep(4)])
+  return Promise.all([sleep(3), sleep(2), sleep(4)])  //4s多点
+  // return Promise.race([sleep(3), sleep(2), sleep(4)])  //2s多点
 } 
 console.time("sleep");
 main()
