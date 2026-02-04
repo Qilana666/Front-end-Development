@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  useParams
+  useParams //读取 URL 中的“动态参数”
 } from 'react-router-dom'
 
 const PostDetail = () => {

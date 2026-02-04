@@ -18,17 +18,20 @@ const InfiniteScroll: React.FC<InfiniteScrollProps> = ({
   children
  }) => {
   // HTMLDivElement React 前端全局提供
+  // ref 对象的 current 属性初始值为 null。
+  // 在组件刚加载（挂载）时，还没有对应的 DOM 元素生成，所以它的值是 null。
+  // 当组件渲染到页面上后，current 的值会被 React 自动设置为对应的 DOM 元素。
   const sentinelRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
-    // dom , 组件挂在后 sentinelRef.current 
+    // dom , 组件挂载之后 sentinelRef.current 
     if (!hasMore || isLoading) return  // 没有数据了， 还在加载中
-    // 浏览器内部 没有性能问题
+    // IntersectionObserver 来自浏览器内部 没有性能问题 不需要防抖节流
     const observer = new IntersectionObserver((entries) => {
       if (entries[0].isIntersecting) { //进入视窗  viewport
         onLoadMore();
       }
     }, {
-      threshold: 0 // 
+      threshold: 0 // 只要目标元素有一个像素进入视窗，就会触发回调函数
     });
     if (sentinelRef.current) {
       observer.observe(sentinelRef.current);
@@ -41,7 +44,7 @@ const InfiniteScroll: React.FC<InfiniteScrollProps> = ({
       }
     }
   }, [onLoadMore, hasMore, isLoading])
-  // react 不建议直接访问dom， useRef
+  // react 不建议直接访问dom， 用useRef 来获取元素的引用
   return (
     <>
       {children}

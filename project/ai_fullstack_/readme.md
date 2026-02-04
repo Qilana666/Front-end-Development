@@ -285,7 +285,7 @@ Method + url 定义方式
   tailwindcss
 - resolve
   alias 路径别名
-  @ -> \_\_dirname/src
+  @ -> \_\_dirname/src 默认使用 @ 指向 src
   npm i -D @types/node node 来到ts 开发的时候
   单独安装了node 的类型申明文件
 - ts 配置文件
@@ -558,22 +558,28 @@ findMany === Select
 ### 首页优化
 
 - 反复切换 首页，其他页面 重复加载
-- 路由的切换， 单页应用 SPA Single Page Application
-  React + React-Router
-  快 不需要白屏 等待
-  / /detail/:id /login
-  服务器 后端路由 http请求 完整的html
-  前端负责路由， js 中拿出来组件（前端），进行替换
+- 路由的切换
+  - SPA
+    单页应用 SPA Single Page Application
+    React + React-Router
+    快 不需要白屏 等待
+  - MPA
+    / /detail/:id /login
+    完全卸载旧页面，加载新页面
+    没有前端路由 请求服务器 后端路由 http请求 完整的html
+    前端负责路由， js 中拿出来组件（前端），进行替换
 - 首页太重要了， 用户频繁的在首页和其他页面切换（美团，天猫）
   首页的不断卸载挂载， 重复渲染 不违和了
 
 ### KeepAlive
 
+- 首页使用频率大，当去别的页面的时候， 隐藏首页，不要卸载
 - home 不能卸载， keep alive
 - react-activation
   cache 缓存 home , 界面和数据都保持
   display:none 离开文档流
   KeepAlive + ALiveScope
+  pnpm i react-activation
 
 ### 登录功能
 
@@ -581,6 +587,9 @@ findMany === Select
   - password 单向加密
     不能解密， 防程序员，黑客， 可以确保密码安全
     bcrypt 单向哈希
+    系统把我的密码算一个hash 值， 存储在数据库中，黑客无法解密密码，他拿到hash 值也无法反向推导出密码。
+    - SELECT setval('users_id_seq', (SELECT COALESCE(MAX(id), 0) FROM users));
+      修复或重置 users 表的自增主键序列，使其与表中现有数据的最大 ID 同步。
 - 登录
   cookie 之前的登录解决方案， 小饼干 http 自动带上cookie ,
   cookie比localStorage 更小的本地存储， 存身份信息
@@ -611,8 +620,15 @@ findMany === Select
 ### 错误异常模块
 
 - 后端，错误处理是核心模块。
-  4XX, 400 BadRequest 401 UnAuthorizated
-  5XX 服务器端错误
+  - 3xx (重定向)：资源已移动到新位置，需要客户端重定向。
+    301：资源已永久移动到新位置。搜索引擎会更新链接，浏览器会缓存重定向。
+  - 4xx (客户端错误)：通常是调用方的问题，不需要重试。
+    400 Bad Request：参数格式不对（比如邮箱格式错了）。
+    401 Unauthorized：没登录/没带 Token。 没有权限访问。
+    403 Forbidden：登录了，但没有权限访问资源（比如普通用户想删管理员文章）。
+    404 Not Found：资源不存在。
+  - 5xx (服务端错误)：通常是代码出 bug 或服务器挂了，需要排查。
+    500 Internal Server Error：代码炸了（比如空指针异常）。
 - try {} catch() { .... }
   catch 错误可以被善待
 - BadRequestException

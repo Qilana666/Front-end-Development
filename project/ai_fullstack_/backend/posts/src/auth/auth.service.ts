@@ -39,7 +39,7 @@ export class AuthService {
     // 模块化分离， 业务专注
     const tokens = await this.generateTokens(user.id.toString(), user.name);
     return {
-      ...tokens,
+      ...tokens, 
       user:{
         id: user.id.toString(),
         name: user.name

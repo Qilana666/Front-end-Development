@@ -7,7 +7,7 @@ import {
   Routes,
   Route
 } from 'react-router-dom'
-import Loading from '@/components/Loading';
+import Loading from '@/components/Loading';  
 import MainLayout from '@/layouts/MainLayout';
 import { AliveScope } from 'react-activation';
 
