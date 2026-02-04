@@ -3,10 +3,9 @@ import {
   useNavigate
 } from 'react-router-dom'
 import type { Post } from '@/types/index'
-import { Badge } from '@/components/ui/badge'
+import { Badge } from '@/components/ui/badge' 
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar'
 import { Eye, Heart } from "lucide-react";
-import LazyLoad from 'react-lazy-load';
 
 interface PostItemProps {
   post: Post;
@@ -32,7 +31,7 @@ const PostItem: React.FC<PostItemProps> = ({post}) => {
           ))
         }
         </div>
-        {/* 列表里面行高的截取 */}
+        {/* 列表里面行高的截取 line-clamp-1 最多一行...*/}
         <h2 className="text-base font-semibold leading-tight line-clamp-1">
         {post.title}
         </h2>
@@ -64,13 +63,12 @@ const PostItem: React.FC<PostItemProps> = ({post}) => {
       {
         post.thumbnail && (
           <div className="w-24 h-24 flex-shrink-0 relative overflow-hidden">
-            <LazyLoad className="w-full h-full">
-              <img 
-                loading="lazy"
-                src={post.thumbnail}
-                className="w-full h-full object-cover"
-              />
-            </LazyLoad>
+            <img 
+              src={post.thumbnail}
+              loading="lazy"
+              className="w-full h-full object-cover"
+              alt={post.title}
+            />
           </div>
         )
       }

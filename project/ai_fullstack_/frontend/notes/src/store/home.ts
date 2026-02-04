@@ -3,6 +3,7 @@ import type {SlideData} from '@/components/SlideShow';
 import type { Post } from '@/types';
 import { fetchPosts } from '@/api/posts';
 
+// 定义 HomeState 接口 描述状态的结构
 interface HomeState {
   banners: SlideData[];
   posts: Post[];
@@ -35,16 +36,17 @@ export const useHomeStore = create<HomeState>((set, get) => ({
   posts:[],
   loadMore: async () => {
     // loading 开关状态 
-    if (get().loading) return; // 避免之前的loadMore还没有执行完，又触发 
+    if (get().loading) return; // 避免之前的loadMore还没有执行完，又触发 避免并发 所以网卡的时候点了又点是没有用的
     // 加载中... 更新状态时, set 只需要传我们想更新的
     set({ loading: true });
     try {
+      // 分页加载
       const { items } = await fetchPosts(get().page);
       if (items.length === 0) { // 所有数据都加载完了 
         set({hasMore: false});
       } else {
         set({
-          posts: [...get().posts, ...items],
+          posts: [...get().posts, ...items],  //将响应的数据 追加到 状态中的 posts 数组
           page: get().page + 1
         })
       }

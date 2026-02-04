@@ -2,7 +2,7 @@ import {
   useRef,
   useEffect
 } from 'react';
-// load more  通用组件
+// load more  通用组件 展示 props
 interface InfiniteScrollProps {
   hasMore: boolean; // 是否所有数据都加载了 分页 
   isLoading?: boolean; // 滚动到底部加载更多 避免重复触发
@@ -10,7 +10,8 @@ interface InfiniteScrollProps {
   children: React.ReactNode // InfiniteScroll 通用的滚动功能，滚动的具体内容接受定制
 }
 
- const InfiniteScroll:React.FC<InfiniteScrollProps> = ({
+const InfiniteScroll: React.FC<InfiniteScrollProps> = ({
+  //默认值
   hasMore,
   onLoadMore,
   isLoading = false,

@@ -17,6 +17,7 @@ import { Input } from '@/components/ui/input';
 
 export default function Home() {
   const navigate = useNavigate();
+  // useHomeStore 从全局状态管理中获取数据
   const { 
     banners, 
     posts,
@@ -44,7 +45,9 @@ export default function Home() {
         </div>
       </div>
       <div className="pt-14 p-4 space-y-4">
+        {/* banners 轮播图 */}
         <SlideShow slides={banners} />
+        {/* 欢迎 */}
         <Card>
           <CardHeader>
             <CardTitle>欢迎来到React Mobile</CardTitle>
@@ -53,6 +56,7 @@ export default function Home() {
             <p className="text-muted-foreground">这是内容区域</p>
           </CardContent>
         </Card>
+        {/*两列式  */}
         <div className="grid grid-cols-2 gap-4">
         {
           [1,2,3,4,5,6,7,8,9,10,11,12,13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24].map((i, index) => (
@@ -67,6 +71,8 @@ export default function Home() {
           ))
         }
         </div>
+
+        {/* import InfiniteScroll from '@/components/InfiniteScroll'; */}
         <div className="container mx-auto py-8">
           <h1 className="text-2xl font-bold mb-6">文章列表</h1>
           {/* 通用的滚动到底部加载更多功能 */}
@@ -75,9 +81,10 @@ export default function Home() {
             isLoading={loading}
             onLoadMore={loadMore}
           >
+            {/* 业务组件 */}
             <ul>
             {
-              posts.map(post => (
+                posts.map(post => (
               <PostItem 
                 key={post.id}
                 post={post}
@@ -85,7 +92,7 @@ export default function Home() {
               ))
             }
             </ul>
-            {/* 业务组件 */}
+            
           </InfiniteScroll>
         </div>
       </div>

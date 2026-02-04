@@ -76,6 +76,7 @@ export class PostsService {
       tags: post.tags.map(t => t.tag.name),
       totalLikes: post._count.likes,
       totalComments: post._count.comments,
+      // 缩略图
       thumbnail: `http://localhost:3000/uploads/resized/${post.files[0]?.filename}-thumbnail.jpg` || ""
     }))
     // const total = await this.prisma.post.count();

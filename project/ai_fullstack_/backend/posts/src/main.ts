@@ -17,7 +17,9 @@ async function bootstrap() {
     // forbidNonWhitelisted: true, // 遇到未定义的属性直接报错
     transform: true // “1” transform  1 
   }))
-  // 搭建静态服务器
+  // 搭建静态服务器 
+  //将uploads目录拼接到当前工作目录  得到完整的路径
+  // 例如：localhost:3000/uploads/avatar/3c203530f8f11f4673f9060a85a51b37.jpg
   console.log(process.cwd(), join(process.cwd(), 'uploads'));
   app.useStaticAssets(join(process.cwd(), 'uploads'), {
     prefix: '/uploads'

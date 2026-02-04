@@ -421,6 +421,7 @@ findMany === Select
 - 建数据库
 - prisma 命令行 + @prisma/client(ORM)
 - npx prisma init 初始化prisma项目，创建prisma 文件夹，schema 文件(数据表的设计蓝图)，并生成了.env 文件（数据库连接的url）
+- npx prisma studio 打开 prisma 可视化界面
 
 ### schema 文件
 
@@ -440,15 +441,26 @@ findMany === Select
 
 ### seeds
 
-### DTO Data Transfer Object
+### DTO Data Transfer Object 数据传输对象
 
 丛前端-》后端-》控制器-》service transfer 过程
 
-- dot/post-query.dto.ts
-- dot/post-new.dto.ts
+- dto/post-query.dto.ts -> post 查询参数
+- dto/post-new.dto.ts -> post 新增参数
+- 功能模块化 高内聚，低耦合
 - class-validator 验证器
   将参数的校验 流程化， 规范化
 - 全局配置一下
+
+### pipe 管道
+
+- _数据验证_
+  这是最常用的功能。管道会检查客户端传入的数据是否符合规则。
+  拦截非法数据：如果数据类型错误（如要数字却传了字符串）或格式不对（如邮箱格式错误），管道会直接拦截请求，返回 400 Bad Request 错误，阻止非法数据进入你的业务逻辑。
+  自动报错：省去了你在控制器里写大量 if-else 判断的麻烦。
+- _数据转换_
+  HTTP 请求传来的数据通常是字符串形式。
+  类型转换：管道可以自动将请求参数（如 id）从字符串转换成数字或布尔值，确保进入业务逻辑的数据类型是正确的。
 
 ### @prisma/client
 
@@ -509,13 +521,16 @@ findMany === Select
 
 - service, 提供数据，动态
 - 静态资源 html/css/js/img
+- 静态服务器是专门用于存储和提供静态文件的服务器。它的核心功能是将预先准备好的文件（如 HTML、CSS、JavaScript、图片、视频等）原封不动地传输给客户端，不进行任何加工或计算。
 - 根目录下的uploads/
 - main.ts 启用静态资源服务器
   区别于动态资源，不需要controller 提供路由
   只需要去配置一下
 - app.useStaticAssets 启用静态资源服务器
-- path join
-  process.cwd() uploads 拼起来
+- path join  
+  process.cwd() uploads 拼起来  
+  cwd Current Working Directory 当前工作目录
+  localhost:3000/uploads/avatar/3c203530f8f11f4673f9060a85a51b37.jpg
 
 ### 接口数据格式调整
 
