@@ -2,9 +2,9 @@
 
 - 缓存组件 keep alive 
   ？ Map es6 新增的数据结构
-  key 超越string  object key 可以   
-  json 区别？ key:value
-- 切换显示
+  key 超越string  object key 也可以   
+  map和json 区别？ key:value
+- 切换显示 display:none
 
 - 考察我们手写组件 KeepAlive
   - children keepalive 

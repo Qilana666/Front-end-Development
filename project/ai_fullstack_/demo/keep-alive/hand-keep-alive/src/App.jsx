@@ -5,6 +5,7 @@ import {
 import KeepAlive from './components/KeepAlive';
 
 const Counter = ({ name }) => {
+  // 缓存组件  组件的状态 也会被缓存
   const [count, setCount] = useState(0); 
   useEffect(() => {
     console.log('挂载', name);
