@@ -11,7 +11,7 @@ interface PostItemProps {
   post: Post;
 }
 const PostItem: React.FC<PostItemProps> = ({post}) => {
-  console.log(post, '//////')
+  // console.log(post, '//////')
   const navigate = useNavigate();
   return (
     <div 

@@ -16,7 +16,7 @@ export default function BottomNav() {
   const navigate  = useNavigate();
   const { pathname } = useLocation();
   const { isLogin } = useUserStore((state) => state);
-  console.log(isLogin, '?????');
+  // console.log(isLogin, '?????');
   // console.log(location, '/////');
   const tabs = [
     {
@@ -30,6 +30,11 @@ export default function BottomNav() {
       icon: ListOrdered
     },
     {
+      label: "聊天",
+      path: "/chat",
+      icon: MessageCircle
+    },
+    {
       label: "我的",
       path: "/mine",
       icon: User
@@ -40,7 +45,7 @@ export default function BottomNav() {
     if (path === pathname) {
       return;
     }
-    console.log(path, '???????????');
+    // console.log(path, '???????????');
     if (needsLoginPath.includes(path) && !isLogin) {
       navigate("/login");
       return;

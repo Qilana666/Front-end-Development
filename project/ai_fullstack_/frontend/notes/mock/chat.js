@@ -36,7 +36,7 @@ export default [
           res.setHeader('Transfer-Encoding', 'chunked');
           // vercel ai sdk 特制头
           res.setHeader('x-vercel-ai-data-stream', 'v1');
-          console.log(process.env.VITE_DEEPSEEK_API_KEY, "///////")
+          // console.log(process.env.VITE_DEEPSEEK_API_KEY, "///////")
           const response = await fetch('https://api.deepseek.com/v1/chat/completions', {
             method: 'POST',
             headers: {
@@ -66,7 +66,7 @@ export default [
             // 解析出 token => 字符串 LLM 内部 数学向量 
             const chunk = decoder.decode(value);
             // data:  前缀
-            console.log(chunk, '/////'); // JSON 字符串 结构 choices[0].delta.content 内容
+            // console.log(chunk, '/////'); // JSON 字符串 结构 choices[0].delta.content 内容
             // delta 增量， 又一次token 生成
             const lines = chunk.split('\n');// 拿到每一行有效数据
             for (let line of lines) { // 不需要用到下标 ，好理解，计数循环比较机械
@@ -75,6 +75,7 @@ export default [
               // data: [DONE]  结束信号
               if (line.startsWith('data: ') && line !== 'data: [DONE]') {
                 try {
+                  // data:  前缀 去掉
                   const data = JSON.parse(line.slice(6));
                   // ?. 代码的健壮性
                   const content = data.choices[0]?.delta?.content || '';

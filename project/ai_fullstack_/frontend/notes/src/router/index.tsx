@@ -7,7 +7,7 @@ import {
   Routes,
   Route
 } from 'react-router-dom'
-import Loading from '@/components/Loading';  
+import Loading from '@/components/Loading';
 import MainLayout from '@/layouts/MainLayout';
 import { AliveScope } from 'react-activation';
 
@@ -39,6 +39,7 @@ export default function RouterConfig({children}: {children?: React.ReactNode}) {
             <Route path="/" element={<MainLayout/>}>
               <Route path="" element={<Home />} />
               <Route path="order" element={<Order />} />
+              <Route path="mine" element={<Mine />} />
             </Route>
           </Routes>
         </Suspense>

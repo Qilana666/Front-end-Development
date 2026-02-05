@@ -1,6 +1,6 @@
 // input handleChange handleSubmit 
 // messages  
-// mockjs /api/chat 流式输出
+// mockjs /api/chat 流式输出 端口切到5173，纯前端 用mock试试
 // chat 业务 
 import {
   useChat

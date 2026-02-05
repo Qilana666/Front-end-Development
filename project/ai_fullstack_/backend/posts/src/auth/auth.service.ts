@@ -70,7 +70,7 @@ export class AuthService {
     const [at, rt] = await Promise.all([
       // 颁发了两个token  access_token
       this.jwtService.signAsync(payload, {
-        expiresIn: '15m', // 有效期 15分钟 更安全 被中间人攻击
+        expiresIn: '1m', // 有效期 15分钟 更安全 被中间人攻击
         secret: process.env.TOKEN_SECRET
       }),
       // refresh_token  刷新
