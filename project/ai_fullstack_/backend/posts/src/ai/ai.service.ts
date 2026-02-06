@@ -9,7 +9,7 @@ export function convertToLangChainMessages(messages: Message[])
 : (HumanMessage | AIMessage | SystemMessage)[]{
   return messages.map(msg => {
     switch(msg.role) {
-      case 'user': 
+      case  'user': 
         return new HumanMessage(msg.content)
       case 'assistant':
         return new AIMessage(msg.content)
@@ -52,12 +52,12 @@ export class AIService {
 
   async chat(messages: Message[], onToken: (token: string) => void) {
     const langChainMessages = convertToLangChainMessages(messages);
-    // console.log(langChainMessages, this.chatModel,'/////');
+    console.log(langChainMessages, this.chatModel,'/////');
     const stream = await this.chatModel.stream(langChainMessages);
     console.log(stream, "//////");
     for await ( const chunk of stream) {
       const content = chunk.content as string; // 断言
-      // console.log(content, "//////");
+      console.log(content, "//////");
       // 用模块化， 回调传递
       if (content) {
         onToken(content);

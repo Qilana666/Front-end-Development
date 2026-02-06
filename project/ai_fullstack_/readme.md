@@ -617,6 +617,17 @@ findMany === Select
   举个例子 nest.js posts 列表查询， count, 和 list Promise.all 并发查询。
   还有nest.js 双token 的并发生成 token 生成是需要开销性能和时间
 
+- 当 Access Token 过期了，用户此时发起请求，服务器会返回 401 Unauthorized 错误。
+  这时候，前端的拦截器（如 Axios 的响应拦截器）会捕捉到这个 401 错误，并触发“救援机制”：
+  暂停：暂停刚才那个失败的请求（比如发帖请求）。
+  出动：携带 Refresh Token，向专门的刷新接口（如 /auth/refresh）发起请求。
+  验证：服务器收到 Refresh Token，验证其是否合法、是否过期。
+  续命：
+  如果验证通过，服务器生成全新的 Access Token（有时连 Refresh Token 也一起更新）。
+  前端拿到新的 Access Token，替换掉旧的。
+  重试：拿出刚才暂存的“发帖请求”，用新的 Access Token 重新发送。
+  完成：用户甚至不知道刚才发生了“续命”操作，文章成功发布。
+
 ### 错误异常模块
 
 - 后端，错误处理是核心模块。
@@ -671,6 +682,11 @@ UseGards 是一个装饰器，用于在控制器或路由处理方法上应用�
 - axios 响应拦截，有成功处理函数， 如果服务器端抛出异常， 执行失败处理函数。
   找到了refresh 入口
 
+- 为什么浏览器直接访问注册接口会失败？
+  - 注册接口是 POST 请求
+  - 浏览器直接访问 URL 时发送的是 GET 请求
+  - 后端只处理 POST 请求，所以会返回 404 错误
+
 ### chatbot
 
 - 流式输出
@@ -688,6 +704,7 @@ UseGards 是一个装饰器，用于在控制器或路由处理方法上应用�
 - http 请求
   Connection: Keep Alive
   事件监听 SSE Server Send Event
+  onToken('[DONE]')
 
 ### chatbot hook
 
@@ -696,6 +713,7 @@ UseGards 是一个装饰器，用于在控制器或路由处理方法上应用�
   Ai 前端应用， nextjs(react ssr框架)
   @ai sdk 封装了chatbot , 快速开发
   - chatbot UI 、响应式和AI 业务剥离
+    pnpm i @ai-sdk/react@1.2.12
 - mockjs 流式输出
   rawResponse 支持流式输出（面试时候不用说）
   - model streaming: true 边生成变响应
@@ -726,3 +744,49 @@ UseGards 是一个装饰器，用于在控制器或路由处理方法上应用�
     前端
     vue ? react
     hello == 你好
+- 服务器开销比较大
+- 封装了 useDebounce 防抖 hooks
+  - 响应式的 debounce 值
+  - useEffect 清除函数 防抖功能
+  - 专一功能
+
+### 语义搜索 embedding
+
+hello 你好 文本匹配失效，语义相似度
+数学问题，向量的概念 高纬世界 openai 1536
+
+- openai embedding.create() 接口
+- fs/promises 文件模块
+  - readFile
+    JSON.parse
+  - writeFile
+    JSON.stringify()
+- 向量的相似度计算
+
+### RAG
+
+Retrieve(检索) Augument（增强） Generation(生成)
+
+1. llm 可以去检索一些文档（私有知识库 embedding）
+2. 将检索到的内容(相似度)， 作为上下文 ，增强prompt
+3. 交给大模型生成
+
+- rag 界面，类似chatbot ,上传文件
+
+### Git AI 工具
+
+- 提效
+  AI editor
+- 专业
+  新手和专家一样工作
+  git commit -m '' 用和本轮开发相关，能够表达功能的描述
+  css BEM 国际命名规范
+  大厂规范，Conventional（约定） Commits
+  Conventional Commits 是一种写 commit 信息的规范，简单说就是让每次 Git 提交的消息格式统一，比如用 feat、fix、docs 这些前缀开头，后面跟上具体干了啥。这样不仅能让人一眼看懂改了什么，还能自动生成 changelog、自动打版本号，对团队协作和发布特别有帮助。
+  有描述性
+  功能性
+  可读性
+- 使用流程 规范化的操作
+  - git diff 拿到结果
+  - prompt commit
+  - git commit -m ''

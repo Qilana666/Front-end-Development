@@ -5,8 +5,8 @@ import { useUserStore } from '@/store/useUserStore';
 // axios.defaults.baseURL = 'http://localhost:5173/api'
 // axios.defaults.baseURL = 'http://localhost:3000/api'
 const instance = axios.create({
-  baseURL: 'http://localhost:5173/api'
-  // baseURL: 'http://localhost:3000/api'
+  // baseURL: 'http://localhost:5173/api'
+  baseURL: 'http://localhost:3000/api'
 });
  
 instance.interceptors.request.use(config => {

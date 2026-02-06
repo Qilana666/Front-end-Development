@@ -21,6 +21,14 @@ export default defineConfig({
     // __dirname node 的超级变量 项目根目录
       '@': path.resolve(__dirname, 'src'),
     }
+  },
+  server: {
+    proxy: {
+      '/api': {
+        target: 'http://localhost:3000',
+        changeOrigin: true,
+        rewrite: (path) => path
+      }
+    }
   }
-  
 })

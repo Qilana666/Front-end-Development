@@ -7,11 +7,22 @@ import {
 } from '@ai-sdk/react';
 
 export const useChatbot = () => {
-  return useChat({
+  console.log('useChatbot initialized');
+  
+  const chat = useChat({
     api: '/api/ai/chat',
-    //  api: 'http://localhost:3000/api/ai/chat',
     onError: (err) => {
       console.error("Chat Error:", err);
+    },
+    onResponse: (response) => {
+      console.log('Chat Response:', response);
+    },
+    onFinish: (result) => {
+      console.log('Chat Finish:', result);
     }
-  })
+  });
+  
+  console.log('Chat instance:', chat);
+  
+  return chat;
 }
