@@ -20,8 +20,10 @@
     "test:e2e": "jest --config ./test/jest-e2e.json"
   },
   "dependencies": {
+    "@langchain/community": "^1.1.12",
     "@langchain/core": "^1.1.18",
     "@langchain/deepseek": "^1.0.8",
+    "@langchain/openai": "^1.2.5",
     "@nestjs/common": "^11.0.1",
     "@nestjs/core": "^11.0.1",
     "@nestjs/jwt": "^11.0.2",

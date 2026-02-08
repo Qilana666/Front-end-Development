@@ -32,11 +32,6 @@ let isRefreshing = false;
 // 保存下来，存到一个队列中， 无缝的将之前的所有失败的请求，再请求，带上新token 成功
 let requestsQueue: any[] = []; 
 
-// 截获请求：你发起了一个请求，它被拦截器抓住了。
-// 检查装备：拦截器去仓库（useUserStore）里看有没有 accessToken。
-// 武装请求：如果有 Token，就把这个 Token 塞进请求头（Header）里，格式是 Authorization: Bearer xxx。
-// 放行：把修改好的请求放走，发给服务器。
-
 instance.interceptors.response.use(res => {
   console.log('/////////')
   // if (res.status != 200) {
@@ -48,7 +43,7 @@ instance.interceptors.response.use(res => {
   // console.log(err, "99999999999999");
   // 请求对象的config 
   const { config, response } = err;
-  console.log(config, response, "?????");
+  // console.log(config, response, "?????");
   // _retry 刻意标记 是否是重试的请求， 避免retry 死循环
   if (response?.status === 401 && !config._retry) {
     // 如果在刷新中,  把后续请求放到队列中
@@ -96,6 +91,5 @@ instance.interceptors.response.use(res => {
   return Promise.reject(err);
   // 刷新token 
 })
-
 
 export default instance

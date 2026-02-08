@@ -4,3 +4,7 @@ import type { Credentail } from '@/types';
 export const doLogin = (data: Credentail) => {
   return axios.post('/auth/login', data);
 }
+
+export const aiAvatar = () => {
+  return axios.get('/ai/avatar');
+}

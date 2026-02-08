@@ -13,7 +13,8 @@ export const fetchPosts = async (page:number = 1,
       console.log(response);
       return response;
     } catch(err) {
-
+      console.error('获取帖子失败:', err);
+      return { items: [] };
     }
 }
 // 发表文章
