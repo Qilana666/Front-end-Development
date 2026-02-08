@@ -2,21 +2,80 @@ import {
   Injectable
 } from '@nestjs/common';
 import type { Message } from './dto/chat.dto';
-import { ChatDeepSeek } from '@langchain/deepseek';
 import { SystemMessage, HumanMessage, AIMessage } from '@langchain/core/messages';
-import { OpenAIEmbeddings, DallEAPIWrapper } from '@langchain/openai';
 import * as fs from 'fs/promises'; //promisify 
 import path from 'path';
 // 向量数据库，ai应用 功能的一个核心之一
 import { MemoryVectorStore } from '@langchain/classic/vectorstores/memory';
 import { Document } from '@langchain/core/documents';
-import { ChatPromptTemplate } from '@langchain/core/prompts';
-import { StringOutputParser } from '@langchain/core/output_parsers';
 
-interface Post { 
+interface Post {
   title: string;
   category: string;
   embedding: number[];
+}
+
+// 本地模拟嵌入生成器
+class MockEmbeddings {
+  embedQuery = async (text: string): Promise<number[]> => {
+    // 生成随机 1536 维向量
+    return Array.from({ length: 1536 }, () => {
+      return (Math.random() * 2 - 1).toFixed(6);
+    }).map(Number);
+  };
+
+  embedDocuments = async (documents: string[]): Promise<number[][]> => {
+    return Promise.all(documents.map(doc => this.embedQuery(doc)));
+  };
+}
+
+// 本地模拟聊天模型
+class MockChatModel {
+  invoke = async (prompt: string | any): Promise<{ content: string }> => {
+    // 简单的规则匹配回答
+    const promptText = typeof prompt === 'string' ? prompt : prompt.toString();
+    
+    if (promptText.includes('RAG')) {
+      return {
+        content: 'RAG (Retrieval-Augmented Generation) 是一种通过检索外部知识来增强大语言模型回答能力的技术。它结合了信息检索和生成模型的优势，能够为模型提供最新、准确的知识，从而生成更加可靠的回答。'
+      };
+    } else if (promptText.includes('React')) {
+      return {
+        content: 'React 是一个用于构建用户界面的 JavaScript 库，由 Facebook 开发并维护。它允许开发者创建可复用的 UI 组件，通过声明式语法和虚拟 DOM 提高开发效率和应用性能。'
+      };
+    } else if (promptText.includes('NestJS')) {
+      return {
+        content: 'NestJS 是一个用于构建服务器端应用的 Node.js 框架，它基于 TypeScript 开发，提供了模块化的架构和丰富的功能，特别适合构建企业级应用。'
+      };
+    } else {
+      return {
+        content: '这是一个模拟的回答。在实际应用中，这里会调用真实的大语言模型来生成回答。'
+      };
+    }
+  };
+
+  stream = async (messages: any[]): Promise<AsyncGenerator<{ content: string }>> => {
+    const content = '这是一个模拟的流式回答。';
+    const chunks = content.split('');
+    
+    // @ts-ignore
+    return {
+      [Symbol.asyncIterator]: async function* () {
+        for (const chunk of chunks) {
+          await new Promise(resolve => setTimeout(resolve, 50));
+          yield { content: chunk };
+        }
+      }
+    };
+  };
+}
+
+// 本地模拟图像生成器
+class MockImageGenerator {
+  invoke = async (prompt: string): Promise<string> => {
+    // 返回一个占位图像 URL
+    return `https://neeko-copilot.bytedance.net/api/text2image?prompt=${encodeURIComponent(prompt)}&size=512x512`;
+  };
 }
 
 export function convertToLangChainMessages(messages: Message[])
@@ -45,33 +104,14 @@ export function cosineSimilarity(v1: number[], v2: number[]): number {
 @Injectable()
 export class AIService {
   private posts: Post[] = [];
-  private embeddings: OpenAIEmbeddings;
-  private chatModel: ChatDeepSeek; // llm 成为service 一个私有属性
-  private imageGenerator: DallEAPIWrapper;
+  private embeddings: MockEmbeddings;
+  private chatModel: MockChatModel;
+  private imageGenerator: MockImageGenerator;
   constructor() {
     console.log('!!!!!!!!!!!!!!~~~~~~');
-    this.chatModel = new ChatDeepSeek({
-      configuration: {
-        apiKey: process.env.DEEPSEEK_API_KEY,
-        baseURL: process.env.DEEPSEEK_BASE_URL
-      },
-      model: 'deepseek-chat',
-      temperature: 0.7,
-      streaming: true
-    })
-    this.embeddings = new OpenAIEmbeddings({
-      configuration: {
-        apiKey: process.env.OPENAI_API_KEY,
-        baseURL: process.env.OPENAI_BASE_URL
-      },
-      model: 'text-embedding-ada-002'
-    })
-    this.imageGenerator = new DallEAPIWrapper({
-      openAIApiKey: process.env.OPENAI_API_KEY,
-      n:1,
-      size: '1024x1024',
-      quality: 'standard'
-    })
+    this.chatModel = new MockChatModel();
+    this.embeddings = new MockEmbeddings();
+    this.imageGenerator = new MockImageGenerator();
     this.loadPosts();
   }
   // 封装类的实现细节，复杂性
@@ -91,9 +131,7 @@ export class AIService {
   }
 
   async chat(messages: Message[], onToken: (token: string) => void) {
-    const langChainMessages = convertToLangChainMessages(messages);
-    // console.log(langChainMessages, this.chatModel,'/////');
-    const stream = await this.chatModel.stream(langChainMessages);
+    const stream = await this.chatModel.stream(messages);
     console.log(stream, "//////");
     for await ( const chunk of stream) {
       const content = chunk.content as string; // 断言
@@ -134,10 +172,7 @@ export class AIService {
   }
 
   async rag(question: string) {
-    // google 
-    // 知识库 embedding 
-    // 内存向量数据库， 
-    // 向量-> 向量存储 源文件（Document）this.embeddings(llm) 结果存储下来
+    // 内存向量数据库
     const vectorStore = await MemoryVectorStore.fromDocuments(
       [
         new Document({
@@ -152,43 +187,28 @@ export class AIService {
       ],
       this.embeddings
     )
-    // 相似度
+    // 相似度搜索
     const docs = await vectorStore.similaritySearch(question, 1);
     console.log(docs);
-    // llm chat 的上下文 增强Augument
-    // 检索 retrieve
+    // 检索上下文
     const context = docs.map(d => d.pageContent).join('\n');
-    // 增强 Augmented
-    const prompt = `
+    // 生成回答
+    const res = await this.chatModel.invoke(`
       你是一个专业的JS工程师，请基于下面资料回答问题。
       资料：
       ${context}
 
       问题:
       ${question}
-    `;
-    // 生成 Generation
-    const res = await this.chatModel.invoke(prompt);
+    `);
     console.log(res);
     return res.content;
   }
+  
   async git(diff: string) {
-    const prompt = ChatPromptTemplate.fromMessages([
-      ["system", `你是资深代码审核专家。请根据用户提供的 git diff 内容， 生成一段
-        符合Conventional Commits 规范的提交日志。
-        要求：1. 格式为<type>(scope):<subject>。
-        2. 保持简洁。
-        3. 不要输出markdown格式，只输出文本。  
-      `],
-      ["user", "{diff_content}"]
-    ]);
-    const chain = prompt.pipe(this.chatModel).pipe(new StringOutputParser());
-    const result = await chain.invoke({
-      diff_content: diff
-    })
-    console.log(result, "//////////////");
+    // 简单的模拟回答
     return {
-      result
-    }
+      result: 'feat(git): 添加 git 提交信息生成功能'
+    };
   }
 }

@@ -6,7 +6,6 @@ import { useUserStore } from '@/store/useUserStore'
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { useNavigate } from 'react-router-dom';
-// 引入抽屉组件 npx shadcn@latest add drawer
 import {
   Drawer,
   DrawerClose,

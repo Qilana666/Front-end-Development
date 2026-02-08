@@ -5,6 +5,6 @@ export const doLogin = (data: Credentail) => {
   return axios.post('/auth/login', data);
 }
 
-export const aiAvatar = () => {
-  return axios.get('/ai/avatar');
+export const getAiAvatar = (name: string) => {
+  return axios.get(`/ai/avatar?name=${name}`)
 }
