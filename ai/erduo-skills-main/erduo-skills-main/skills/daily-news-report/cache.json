@@ -1,0 +1,84 @@
+{
+  "schema_version": "1.0",
+  "description": "Daily News Report 缓存文件，用于避免重复抓取和跟踪历史表现",
+
+  "last_run": {
+    "date": "2026-02-15",
+    "duration_seconds": 180,
+    "items_collected": 20,
+    "items_published": 20,
+    "sources_used": ["websearch"]
+  },
+
+  "source_stats": {
+    "_comment": "记录每个源的历史表现，用于动态调整优先级",
+    "websearch": {
+      "total_fetches": 1,
+      "success_count": 1,
+      "avg_items_per_fetch": 20,
+      "avg_quality_score": 4.2,
+      "last_fetch": "2026-02-15",
+      "last_success": "2026-02-15"
+    }
+  },
+
+  "url_cache": {
+    "_comment": "已处理的 URL 缓存，避免重复收录",
+    "_ttl_hours": 168,
+    "entries": {
+      "http://m.toutiao.com/group/7605245706927948294/": "2026-02-15",
+      "http://m.toutiao.com/group/7605646069623456299/": "2026-02-15",
+      "http://m.toutiao.com/group/7605550953973973538/": "2026-02-15",
+      "http://m.toutiao.com/group/7605780399393964571/": "2026-02-15",
+      "http://m.toutiao.com/group/7605080635954201130/": "2026-02-15",
+      "http://m.toutiao.com/group/7591805509343183410/": "2026-02-15",
+      "http://m.toutiao.com/group/7601056023582949938/": "2026-02-15",
+      "http://m.toutiao.com/group/7602264942561034803/": "2026-02-15",
+      "http://m.toutiao.com/group/7595521853473456666/": "2026-02-15",
+      "http://m.toutiao.com/group/7597748847570174514/": "2026-02-15",
+      "http://m.toutiao.com/group/7586557677304676927/": "2026-02-15",
+      "http://m.toutiao.com/group/7605536147648807424/": "2026-02-15",
+      "http://m.toutiao.com/group/7605778558639669760/": "2026-02-15",
+      "http://m.toutiao.com/group/7605534902724887080/": "2026-02-15",
+      "http://m.toutiao.com/group/7606704364773802523/": "2026-02-15",
+      "http://m.toutiao.com/group/7606089491829096995/": "2026-02-15",
+      "http://m.toutiao.com/group/7605749528599347752/": "2026-02-15",
+      "http://m.toutiao.com/group/7603186882486207003/": "2026-02-15",
+      "http://m.toutiao.com/group/7521386111801836047/": "2026-02-15",
+      "http://m.toutiao.com/group/7603710915908780587/": "2026-02-15"
+    }
+  },
+
+  "content_hashes": {
+    "_comment": "内容指纹，用于去重",
+    "_ttl_hours": 168,
+    "entries": {}
+  },
+
+  "article_history": {
+    "_comment": "已收录文章的简要记录",
+    "2026-01-21": [],
+    "2026-02-15": [
+      "AI Agent编程革命来袭!Anthropic重磅报告揭秘2026年8大颠覆趋势",
+      "2026年AI编程革命:Vibe Coding黄金技术栈曝光",
+      "2026实测封神!Python vs Rust vs C++差距10-100倍，选型再不踩坑",
+      "2026 TIOBE榜单大反转，C语言狂升第2，Rust终究没替代它?",
+      "2026爆款|Rust构建工具革新，前后端性能直接翻倍",
+      "2026年云计算九大趋势预测",
+      "2026年低代码趋势与 Top10 平台推荐:企业级选型与结构化评估指南",
+      "2026最赚IT岗对比:Linux运维、DevOps、SRE，选对少走5年弯路!",
+      "2026年软件测试必备工具套装:全面指南与趋势分析",
+      "2026年数字化转型趋势:哪些策略将成为关键",
+      "谷歌工程负责人:2026年AI编程上线，经典软件工程纪律仍重要",
+      "2026必看:Claude+Python实战指南，程序员效率翻倍但别踩坑",
+      "全球AI话题要闻(2026.02.12)",
+      "全球AI话题要闻(2026.02.11)",
+      "2026:AI从\"实验\"迈向\"价值兑现\"——全球发展趋势深度解析",
+      "2026年2月13日，全球AI、具身智能及低空经济产业发展综合报告",
+      "2026年2月12日全球AI、具身智能与人形机器人、低空经济发展全景",
+      "2026编程语言选型真相:别再追爆款了，多数开发者都踩错了坑",
+      "2025-2026年最佳编程语言指南",
+      "WIPO中国:共议人工智能时代的知识产权与创新"
+    ]
+  }
+}
