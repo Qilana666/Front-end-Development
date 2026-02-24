@@ -1,9 +1,10 @@
 # OpenAI AIGC Models
 
-## openai 提供了llm sdk
+## openai 提供了llm sdk（Software Development Kit 软件开发工具包）
+
 - 初始化了一个后端项目
   node 是js的后端实现，命令行实现
-  npm node package management node  包管理
+  npm -> node package management node包管理
   npm init -y
   npm i openai@4.71.0（把openai 库安装到项目中）
   - node 以其轻量化开发 ，适合中小型项目，占据大量开发市场

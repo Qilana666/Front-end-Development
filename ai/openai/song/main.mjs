@@ -5,12 +5,12 @@ import dotenv from 'dotenv';
 dotenv.config();//.env文件中的配置添加到环境变量
 // llm client 实例化
 const client = new OpenAI(
-  {
+  {  
     apiKey: process.env.OPENAI_API_KEY,
     // baseURL:'https://api.openai.com/v1'
     baseURL: 'https://api.302.ai/v1'
   }
-  // 算力，电力， 凭据
+  // 算力，电力， 凭据(怎么收费)
 );
 // 异步的操作
 // AIGC 
