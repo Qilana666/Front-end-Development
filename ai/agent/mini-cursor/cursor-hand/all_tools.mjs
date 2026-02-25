@@ -11,9 +11,9 @@ import { z } from 'zod';
 const readFileTool = tool(
     async ({ filePath }) =>  {
         try {
-        console.log(`[工具调用] read_file("${filePath}") 成功读取 ${content.length} 字节`) 
-        const content = await fs.readFile(filePath, 'utf-8');
-        return `文件内容：\n${content}`;
+            const content = await fs.readFile(filePath, 'utf-8');
+            console.log(`[工具调用] read_file("${filePath}") 成功读取 ${content.length} 字节`) 
+            return `文件内容：\n${content}`;
         } catch (error) {
             console.log(`工具调用 read_file("${filePath}") 失败: ${error.message}`);
             return `错误：${error.message}`;
@@ -56,7 +56,7 @@ const writeFileTool = tool(
 
 // 执行命令工具
 
-const executeCommanTool = tool(
+const executeCommandTool = tool(
     async ({ command, workingDirectory }) => {
         const cwd = workingDirectory || process.cwd(); // 默认当前工作目录
         console.log(`[工具调用] execute_command("${command}") 在目录 ${cwd} 执行命令`);
@@ -74,7 +74,7 @@ const executeCommanTool = tool(
             child.on('close', (code) => {
                 if (code === 0) {
                     // 成功退出
-                    console.log('[工具调用] execute_command("${command}") 命令执行成功');
+                    console.log(`[工具调用] execute_command("${command}") 命令执行成功`);
                     const cwdInfo = workingDirectory? 
                     `
                     \n\n重要提示：命令在目录"${workingDirectory}"中执行成功。
@@ -127,6 +127,6 @@ const listDirectoryTool = tool(
 export {
     readFileTool,
     writeFileTool,
-    executeCommanTool,
+    executeCommandTool,
     listDirectoryTool
 }
