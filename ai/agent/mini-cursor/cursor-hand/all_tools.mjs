@@ -104,6 +104,8 @@ const executeCommandTool = tool(
 // 列出目录工具
 const listDirectoryTool = tool(
     async ({ directoryPath }) => {
+        // 函数体 -》 具体实现
+        // 异常处理：文件不存在或者被损坏
         try {
             // 读取目录内容
             const files = await fs.readdir(directoryPath);
@@ -115,6 +117,7 @@ const listDirectoryTool = tool(
             return `列出目录失败：${error.message}`
         }
     },
+    // 配置对象 -》说明书 
     {
         name: 'list_directory',
         description: '列出指定目录下的所有文件和文件夹',
