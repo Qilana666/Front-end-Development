@@ -54,3 +54,32 @@ so大家都按一个约定来
   - registerTool
     description
   - connect transport
+
+## mcp 三者关系
+- *mcp hosts*
+  cursor/vite Agent host
+- *mcp clients*
+  mcp规范 的tools
+- *mcp server*
+  mcp tool 运行的服务器容器
+- 工作流程
+  - MCP host 配置文件 SDD 规范驱动开发 (Specification-Driven Development)
+  - initialize 发送一起请求
+    得到mcp server 提供的tools 列表和详情
+  - host 接收到prompt 任务
+  - 检索mcp 配置文件
+  - client tool 调用通信方式 （stdio,http）
+  - mcp server 执行并返回结果
+  - llm ToolMessage
+
+## MCP 开发流程
+- new McpServer 创建了mcp server 实例
+- server.register Tool/Resource/Prompt 名字，描述，函数
+- 通信方式 StdioServerTransport HttpServerTransport
+- server.connect(transport)
+- host mcp配置
+
+## mcp 直接入住Agent 程序
+
+- 怎么把mcp tools 集成到程序里面？
+  - mcp是可拔插的
