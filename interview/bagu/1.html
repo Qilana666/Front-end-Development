@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BeforeUnload</title>
+</head>
+
+<body>
+  <h1>试着关闭这个标签页，或者刷新页面</h1>
+  <p>你应该会看到一个浏览器自带的弹窗问你
+    是否要离开这个网站？
+  </p>
+  <script>
+    window.addEventListener('beforeunload', function (event) {
+      alert('beforeunload 事件已触发');
+      e.preventDefault();
+      e.returnValue = '';
+    })
+    // 补充监听 pagehide，以防是 bfcache 导致的
+    window.addEventListener('pagehide', function (e) {
+      if (e.persisted) {
+        console.log('⚠️ 页面进入 bfcache (未触发 beforeunload)，这是正常的浏览器优化。');
+      } else {
+        console.log('✅ 页面正常卸载流程。');
+      }
+    });
+  </script>
+</body>
+
+</html>
