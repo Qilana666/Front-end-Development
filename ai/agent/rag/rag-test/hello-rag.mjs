@@ -124,9 +124,9 @@ for (const question of questions) {
     retrievedDocs.forEach((doc, i) => {
         const scoreResult = scoreResults.find(
             ([scoredDoc]) => scoredDoc.pageContent === doc.pageContent
-        );
-      const score = scoreResult ? scoreResult[1] : null;
-      // 如果是余弦距离，范围通常在 0 到 2 之间（或者归一化后）。
+      );
+      //score 余弦距离 范围通常在 0 到 2 之间
+      const score = scoreResult ? scoreResult[1] : null;  
       // 这里用 1 - score 是为了将其转换为直观的 相似度 (Similarity)，数值越接近 1 表示越相似。
         const similarity = score ? (1 - score).toFixed(2) : "N/A";
         console.log(`\n 文档 ${i+1} 相似度：${similarity}`);
