@@ -1,0 +1,15 @@
+{
+  "name": "splitter-test",
+  "version": "1.0.0",
+  "description": "- loader 加载的大Document 来自@langchain/community\r   PDF doc 不是一个类型 它们的loader不一样\r - RecursiveCharaterTextSplitter\r   限定text类型\r - splitter\r   按照 character 按这个切 符合语义\r   是个数组[\"。\",\"?\",\"!\",\",\"]\r   优先级 。最优先\r   chunk_size的靠近 递归的尝试 ？！,\r   保持语义不被破坏\r   切断没关系 overlap 重叠的部分 牺牲一定的空间（chunk_size 10%） 重复",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "js-tiktoken": "^1.0.21"
+  }
+}

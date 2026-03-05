@@ -25,3 +25,4 @@
     RecursiveTextSplitter 语义的完整性特别好
     特殊 MarkdownTextSplitter 按markdown语法切割 为什么属于RecursiveTextSplitter子类
     通用 RecursiveTextSplitter 递归的切割
+    pnpm i js-tiktoken 计算token数量
